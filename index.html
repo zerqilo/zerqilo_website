@@ -185,6 +185,223 @@ function sendWhatsApp(e){
   const msg=`Hello ZERQILO,%0A%0AName: ${encodeURIComponent(name)}%0AService: ${encodeURIComponent(service)}%0ALocation: ${encodeURIComponent(location)}%0APreferred Date/Time: ${encodeURIComponent(date)}%0ADetails: ${encodeURIComponent(details)}`;
   window.open('https://wa.me/919503140757?text='+msg,'_blank');
 }
-</script>
+</script
+ <!-- ZERQILO CUSTOMER AUTH UI -->
+<div id="zerqiloAuthBox" style="
+display:flex;
+gap:10px;
+align-items:center;
+justify-content:center;
+margin:20px auto;
+padding:15px;
+">
+
+<button onclick="zerqiloShowAuth('login')" style="
+padding:12px 22px;
+border:0;
+border-radius:10px;
+background:#073b63;
+color:white;
+font-weight:700;
+cursor:pointer;
+">
+Login
+</button>
+
+<button onclick="zerqiloShowAuth('signup')" style="
+padding:12px 22px;
+border:0;
+border-radius:10px;
+background:#39b54a;
+color:white;
+font-weight:700;
+cursor:pointer;
+">
+Create Account
+</button>
+
+</div>
+
+<div id="zerqiloAuthModal" style="
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.55);
+z-index:9999;
+align-items:center;
+justify-content:center;
+">
+
+<div style="
+background:white;
+width:min(420px,90%);
+padding:28px;
+border-radius:20px;
+box-shadow:0 20px 60px rgba(0,0,0,.25);
+">
+
+<h2 id="zerqiloAuthTitle">Login</h2>
+
+<input
+id="zerqiloName"
+type="text"
+placeholder="Full Name"
+style="display:none;width:100%;padding:13px;margin:8px 0;border:1px solid #ddd;border-radius:8px;box-sizing:border-box;"
+>
+
+<input
+id="zerqiloEmail"
+type="email"
+placeholder="Email Address"
+style="width:100%;padding:13px;margin:8px 0;border:1px solid #ddd;border-radius:8px;box-sizing:border-box;"
+>
+
+<input
+id="zerqiloPassword"
+type="password"
+placeholder="Password"
+style="width:100%;padding:13px;margin:8px 0;border:1px solid #ddd;border-radius:8px;box-sizing:border-box;"
+>
+
+<button
+onclick="zerqiloSubmitAuth()"
+style="
+width:100%;
+padding:13px;
+margin-top:10px;
+border:0;
+border-radius:9px;
+background:#073b63;
+color:white;
+font-weight:700;
+cursor:pointer;
+">
+Continue
+</button>
+
+<button
+onclick="zerqiloCloseAuth()"
+style="
+width:100%;
+padding:11px;
+margin-top:8px;
+border:1px solid #ddd;
+border-radius:9px;
+background:white;
+cursor:pointer;
+">
+Close
+</button>
+
+<p id="zerqiloAuthMessage" style="margin-top:12px;font-size:14px;"></p>
+
+</div>
+</div>
+
+<script>
+
+let zerqiloAuthMode = "login";
+
+function zerqiloShowAuth(mode) {
+
+zerqiloAuthMode = mode;
+
+document.getElementById("zerqiloAuthModal").style.display = "flex";
+
+document.getElementById("zerqiloAuthTitle").textContent =
+mode === "login" ? "Login to ZERQILO" : "Create ZERQILO Account";
+
+document.getElementById("zerqiloName").style.display =
+mode === "signup" ? "block" : "none";
+
+document.getElementById("zerqiloAuthMessage").textContent = "";
+
+}
+
+function zerqiloCloseAuth() {
+
+document.getElementById("zerqiloAuthModal").style.display = "none";
+
+}
+
+async function zerqiloSubmitAuth() {
+
+const email =
+document.getElementById("zerqiloEmail").value.trim();
+
+const password =
+document.getElementById("zerqiloPassword").value;
+
+const name =
+document.getElementById("zerqiloName").value.trim();
+
+const message =
+document.getElementById("zerqiloAuthMessage");
+
+if (!email || !password) {
+
+message.textContent = "Please enter email and password.";
+return;
+
+}
+
+message.textContent = "Please wait...";
+
+if (zerqiloAuthMode === "signup") {
+
+if (!name) {
+
+message.textContent = "Please enter your full name.";
+return;
+
+}
+
+const { data, error } =
+await supabaseClient.auth.signUp({
+email: email,
+password: password,
+options: {
+data: {
+full_name: name
+}
+}
+});
+
+if (error) {
+
+message.textContent = error.message;
+return;
+
+}
+
+message.textContent =
+"Account created. Please check your email for confirmation.";
+
+} else {
+
+const { data, error } =
+await supabaseClient.auth.signInWithPassword({
+email: email,
+password: password
+});
+
+if (error) {
+
+message.textContent = error.message;
+return;
+
+}
+
+message.textContent = "Login successful.";
+
+setTimeout(() => {
+zerqiloCloseAuth();
+}, 1000);
+
+}
+
+}
+
+</script> 
 </body>
 </html>
