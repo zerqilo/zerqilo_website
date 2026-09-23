@@ -82,7 +82,8 @@ footer{background:#052e4d;color:#d9e7f1;padding:32px 0}
       <a href="#services">Services</a>
       <a href="#why">Why ZERQILO</a>
       <a href="#booking">Book Now</a>
-      <a class="btn btn-blue" href="#" onclick="zerqiloShowAuth('signup'); return false;">Create Account</a>
+     <a class="btn btn-blue" href="#" onclick="zerqiloShowAuth('login'); return false;">Login</a>
+<a class="btn btn-blue" href="#" onclick="zerqiloShowAuth('signup'); return false;">Create Account</a> 
     </nav>
     <a class="btn btn-green" href="https://wa.me/919503140757?text=Hello%20ZERQILO%2C%20I%20want%20to%20book%20a%20cleaning%20service." target="_blank">WhatsApp</a>
   </div>
@@ -187,42 +188,7 @@ function sendWhatsApp(e){
   window.open('https://wa.me/919503140757?text='+msg,'_blank');
 }
 </script
- <!-- ZERQILO CUSTOMER AUTH UI -->
-<div id="zerqiloAuthBox" style="
-display:flex;
-gap:10px;
-align-items:center;
-justify-content:center;
-margin:20px auto;
-padding:15px;
-">
-
-<button onclick="zerqiloShowAuth('login')" style="
-padding:12px 22px;
-border:0;
-border-radius:10px;
-background:#073b63;
-color:white;
-font-weight:700;
-cursor:pointer;
-">
-Login
-</button>
-
-<button onclick="zerqiloShowAuth('signup')" style="
-padding:12px 22px;
-border:0;
-border-radius:10px;
-background:#39b54a;
-color:white;
-font-weight:700;
-cursor:pointer;
-">
-Create Account
-</button>
-
-</div>
-
+ 
 <div id="zerqiloAuthModal" style="
 display:none;
 position:fixed;
