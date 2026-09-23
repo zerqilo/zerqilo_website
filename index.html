@@ -4,857 +4,465 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ZERQILO | Home Cleaning Services in Pune</title>
-<meta name="description" content="ZERQILO provides professional sofa, mattress, carpet, bathroom deep cleaning and vacant flat cleaning services in Pune. ">
-<meta name="theme-color" content="#073b63">
+<meta name="description" content="ZERQILO provides professional home cleaning services in Pune.">
 <meta name="theme-color" content="#073b63">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script>
-const SUPABASE_URL = "https://qwjanxcnwaenjrimhczx.supabase.co"
-const SUPABASE_ANON_KEY = "sb_publishable_f58_CZbLvmdHoWSAXTVOmw_v2xntbiA"
-
-const supabaseClient = supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_ANON_KEY
-);
+const SUPABASE_URL = "https://qwjanxcnwaenjrimhczx.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_f58_CZbLvmdHoWSAXTVOmw_v2xntbiA";
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 </script>
 
 <style>
-:root{--navy:#073b63;--blue:#0b5b91;--green:#39b54a;--light:#f5faf7;--text:#17324a;--muted:#607487;--white:#fff}
+:root{
+  --navy:#073b63;
+  --blue:#0b67a6;
+  --blue2:#0878c9;
+  --green:#16a34a;
+  --green2:#0b8f3e;
+  --ink:#102a43;
+  --muted:#526779;
+  --line:#e4ebf2;
+  --soft:#f5f9fd;
+  --white:#fff;
+}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,Helvetica,sans-serif;color:var(--text);background:#fff;line-height:1.5}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:#fff;line-height:1.5}
 a{text-decoration:none;color:inherit}
-.container{width:min(1120px,92%);margin:auto}
-header{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid #e7edf1}
-.nav{height:72px;display:flex;align-items:center;justify-content:space-between}
-.logo{font-size:30px;font-weight:900;letter-spacing:2px;color:var(--navy)}
-.logo span{color:var(--green)}
-nav{display:flex;gap:26px;font-weight:700;font-size:14px}
-.btn{display:inline-block;padding:13px 20px;border-radius:10px;font-weight:800;border:0;cursor:pointer}
-.btn-green{background:var(--green);color:#fff}
-.btn-blue{background:var(--navy);color:#fff}
-.hero{background:linear-gradient(135deg,#eef9f2 0%,#f7fbff 55%,#eaf4fb 100%);padding:78px 0}
-.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:50px;align-items:center}
-.badge{display:inline-block;background:#dff5e4;color:#18752a;padding:7px 12px;border-radius:999px;font-size:13px;font-weight:800;margin-bottom:16px}
-h1{font-size:clamp(40px,6vw,68px);line-height:1.02;color:var(--navy);margin-bottom:18px}
-h1 span{color:var(--green)}
-.hero p{font-size:18px;color:var(--muted);max-width:620px;margin-bottom:28px}
-.actions{display:flex;gap:12px;flex-wrap:wrap}
-.hero-card{background:#fff;border-radius:24px;padding:28px;box-shadow:0 18px 50px rgba(7,59,99,.12)}
-.hero-card h3{font-size:23px;color:var(--navy);margin-bottom:15px}
-.quick{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.quick div{padding:16px;border:1px solid #e3ebef;border-radius:14px;font-weight:800}
-section{padding:72px 0}
+.container{width:min(1380px,92%);margin:auto}
+
+/* HEADER */
+.site-header{
+  position:sticky;top:0;z-index:1000;
+  background:#fff;border-bottom:1px solid var(--line);
+}
+.header-inner{
+  min-height:104px;display:flex;align-items:center;gap:34px;
+}
+.brand{min-width:300px}
+.brand-main{
+  font-size:48px;font-weight:900;letter-spacing:2px;
+  line-height:.95;color:var(--navy);
+}
+.brand-main span{color:#149447}
+.brand-sub{font-size:18px;margin-top:7px;color:#17324a}
+.nav{
+  display:flex;align-items:center;gap:28px;flex:1;
+  white-space:nowrap;
+}
+.nav a{font-size:16px;font-weight:600}
+.nav a:not(.pill):hover{color:var(--blue)}
+.pill{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:15px 22px;border-radius:10px;color:#fff!important;
+  font-weight:800!important;
+}
+.login,.create{background:#1264a3}
+.call{background:#19a64a}
+.whatsapp{background:#0b9140}
+
+/* TRUST STRIP */
+.trust{background:#f5f9fd;border-bottom:1px solid var(--line)}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.trust-item{
+  min-height:142px;padding:25px 28px;display:flex;align-items:center;
+  gap:18px;border-right:1px solid var(--line)
+}
+.trust-item:last-child{border-right:0}
+.trust-icon{
+  flex:0 0 72px;width:72px;height:72px;border-radius:50%;
+  background:#e4f0ff;color:#1264a3;display:grid;place-items:center;
+}
+.trust-icon svg{width:40px;height:40px;stroke:currentColor;fill:none;stroke-width:2}
+.trust-title{font-size:20px;font-weight:800;margin-bottom:5px}
+.trust-text{font-size:15px;color:var(--muted)}
+
+/* HERO */
+.hero{
+  position:relative;overflow:hidden;color:#fff;
+  min-height:628px;
+  background:linear-gradient(110deg,#07558f 0%,#0879c8 58%,#0c6eae 100%);
+}
+.hero-inner{
+  min-height:628px;display:grid;grid-template-columns:46% 54%;
+  position:relative;
+}
+.hero-copy{
+  position:relative;z-index:3;padding:72px 0 45px;
+}
+.hero h1{
+  color:#fff;font-size:76px;line-height:.98;
+  font-weight:900;letter-spacing:-2px;margin-bottom:24px;
+}
+.hero p{
+  max-width:610px;font-size:23px;line-height:1.45;
+  margin-bottom:30px;color:#fff;
+}
+.hero-cta{
+  display:inline-flex;align-items:center;gap:12px;
+  background:#16b94b;color:#fff;font-size:20px;font-weight:800;
+  padding:17px 28px;border-radius:10px;
+  box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+.hero-cta:hover{background:#12a642}
+.hero-cta svg{width:28px;height:28px;fill:none;stroke:#fff;stroke-width:2}
+
+.mini-services{
+  display:flex;gap:28px;margin-top:48px;
+}
+.mini{
+  width:100px;text-align:center;color:#fff;
+}
+.mini-icon{
+  width:62px;height:62px;border-radius:50%;
+  background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.12);
+  display:grid;place-items:center;margin:0 auto 10px;
+}
+.mini-icon svg{width:32px;height:32px;stroke:#fff;fill:none;stroke-width:2}
+.mini span{display:block;font-size:15px;font-weight:700;line-height:1.25}
+
+.hero-visual{
+  position:relative;min-height:628px;
+  background-image:url("assets/hero-living-room.jpg");
+  background-size:cover;background-position:center;
+}
+.hero-visual:after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(7,85,143,.65),transparent 28%);
+  pointer-events:none;
+}
+
+/* SERVICES */
+.section{padding:72px 0}
 .section-head{text-align:center;margin-bottom:38px}
-.section-head h2{font-size:36px;color:var(--navy);margin-bottom:8px}
-.section-head p{color:var(--muted)}
-.services{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
-.service{border:1px solid #e3ebef;border-radius:18px;padding:22px;background:#fff;transition:.2s}
-.service:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(7,59,99,.08)}
-.icon{font-size:34px;margin-bottom:14px}
-.service h3{font-size:18px;color:var(--navy);margin-bottom:6px}
-.service p{font-size:14px;color:var(--muted)}
-.why{background:var(--light)}
-.features{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.feature{background:#fff;padding:24px;border-radius:18px}
-.feature strong{display:block;color:var(--navy);font-size:17px;margin-bottom:5px}
-.feature p{font-size:14px;color:var(--muted)}
-.booking{background:var(--navy);color:#fff}
-.booking-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-.booking h2{font-size:38px;margin-bottom:12px}
-.booking p{color:#d9e7f1;margin-bottom:20px}
-form{background:#fff;padding:24px;border-radius:18px}
-input,select,textarea{width:100%;padding:13px 14px;border:1px solid #d9e3e9;border-radius:9px;margin-bottom:12px;font:inherit}
-textarea{min-height:90px;resize:vertical}
-footer{background:#052e4d;color:#d9e7f1;padding:32px 0}
-.footer-grid{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.small{font-size:13px;color:#a9c0d1;margin-top:8px}
-@media(max-width:900px){.hero-grid,.booking-grid{grid-template-columns:1fr}.services{grid-template-columns:repeat(2,1fr)}.features{grid-template-columns:repeat(2,1fr)}nav{display:none}}
-@media(max-width:560px){.services,.features{grid-template-columns:1fr}.hero{padding:55px 0}.nav{height:64px}.logo{font-size:25px}.section-head h2{font-size:30px}}
+.section-head h2{font-size:40px;color:var(--navy);margin-bottom:8px}
+.section-head p{font-size:18px;color:var(--muted)}
+.services-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+.service-card{
+  border:1px solid var(--line);border-radius:18px;padding:26px;
+  background:#fff;box-shadow:0 8px 25px rgba(7,59,99,.05);
+  transition:.2s;
+}
+.service-card:hover{transform:translateY(-4px);box-shadow:0 15px 35px rgba(7,59,99,.10)}
+.service-icon{font-size:38px;margin-bottom:14px}
+.service-card h3{font-size:19px;color:var(--navy);margin-bottom:7px}
+.service-card p{font-size:14px;color:var(--muted)}
+
+/* WHY */
+.why{background:var(--soft)}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.why-card{background:#fff;padding:25px;border-radius:18px;border:1px solid var(--line)}
+.why-card strong{display:block;color:var(--navy);font-size:18px;margin-bottom:7px}
+.why-card p{font-size:14px;color:var(--muted)}
+
+/* CONTACT */
+.contact{background:var(--navy);color:#fff}
+.contact-inner{display:flex;align-items:center;justify-content:space-between;gap:25px}
+.contact h2{font-size:36px;margin-bottom:8px}
+.contact p{color:#d9e7f1}
+.contact-actions{display:flex;gap:12px;flex-wrap:wrap}
+
+/* FOOTER */
+footer{background:#052e4d;color:#d9e7f1;padding:30px 0}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.small{font-size:13px;color:#a9c0d1;margin-top:6px}
+
+/* AUTH */
+#zerqiloAuthModal{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.58);
+  z-index:9999;align-items:center;justify-content:center;padding:20px;
+}
+.auth-box{
+  background:#fff;width:min(430px,100%);padding:30px;border-radius:22px;
+  box-shadow:0 25px 80px rgba(0,0,0,.28);
+}
+.auth-box h2{color:var(--navy);margin-bottom:8px}
+.auth-box input{
+  width:100%;padding:13px;margin:8px 0;border:1px solid #d9e3e9;
+  border-radius:9px;font:inherit
+}
+.auth-primary{
+  width:100%;padding:13px;margin-top:10px;border:0;border-radius:9px;
+  background:var(--navy);color:#fff;font-weight:800;cursor:pointer
+}
+.auth-close{
+  width:100%;padding:11px;margin-top:8px;border:1px solid #ddd;
+  border-radius:9px;background:#fff;cursor:pointer
+}
+
+/* RESPONSIVE */
+@media(max-width:1150px){
+  .header-inner{gap:18px}
+  .brand{min-width:245px}
+  .brand-main{font-size:39px}
+  .nav{gap:16px}
+  .pill{padding:13px 16px}
+  .hero h1{font-size:62px}
+}
+@media(max-width:950px){
+  .header-inner{flex-wrap:wrap;padding:16px 0}
+  .nav{order:3;width:100%;justify-content:center;flex-wrap:wrap}
+  .trust-grid{grid-template-columns:repeat(2,1fr)}
+  .hero-inner{grid-template-columns:1fr}
+  .hero-visual{min-height:420px}
+  .hero-copy{padding:60px 0 25px}
+  .services-grid{grid-template-columns:repeat(2,1fr)}
+  .why-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .brand{min-width:0}
+  .brand-main{font-size:34px}
+  .brand-sub{font-size:14px}
+  .nav{gap:10px}
+  .nav a{font-size:13px}
+  .pill{padding:11px 13px}
+  .trust-grid{grid-template-columns:1fr}
+  .trust-item{min-height:105px}
+  .hero h1{font-size:48px}
+  .hero p{font-size:18px}
+  .hero-visual{min-height:300px}
+  .mini-services{gap:8px;flex-wrap:wrap}
+  .mini{width:78px}
+  .mini span{font-size:12px}
+  .services-grid,.why-grid{grid-template-columns:1fr}
+  .contact-inner{flex-direction:column;align-items:flex-start}
+}
 </style>
 </head>
+
 <body>
-<style>
-.z-premium-header{
-  background:#fff;
-  border-bottom:1px solid #e8edf3;
-  position:sticky;
-  top:0;
-  z-index:100;
-}
 
-.z-premium-nav{
-  max-width:1250px;
-  margin:auto;
-  min-height:92px;
-  padding:0 28px;
-  display:flex;
-  align-items:center;
-  gap:35px;
-}
-
-.z-brand{
-  text-decoration:none;
-  min-width:285px;
-}
-
-.z-brand-main{
-  font-size:42px;
-  font-weight:900;
-  letter-spacing:2px;
-  color:#073b63;
-  line-height:1;
-}
-
-.z-brand-main span{
-  color:#159447;
-}
-
-.z-brand-sub{
-  font-size:17px;
-  color:#17324a;
-  margin-top:5px;
-}
-
-.z-nav-links{
-  display:flex;
-  align-items:center;
-  gap:30px;
-  flex:1;
-}
-
-.z-nav-links a{
-  text-decoration:none;
-  color:#102a43;
-  font-size:16px;
-  font-weight:600;
-}
-
-.z-nav-links a:hover{
-  color:#075b96;
-}
-
-.z-login{
-  background:#1264a3;
-  color:#fff !important;
-  padding:15px 25px;
-  border-radius:10px;
-}
-
-.z-create{
-  background:#1264a3;
-  color:#fff !important;
-  padding:15px 25px;
-  border-radius:10px;
-}
-
-.z-call{
-  background:#19a64a;
-  color:#fff !important;
-  padding:15px 25px;
-  border-radius:10px;
-}
-
-.z-whatsapp{
-  background:#0b9140;
-  color:#fff !important;
-  padding:15px 25px;
-  border-radius:10px;
-}
-
-.z-trust{
-  background:#f4f9fd;
-  border-bottom:1px solid #e1eaf2;
-}
-
-.z-trust-inner{
-  max-width:1250px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-}
-
-.z-trust-item{
-  padding:25px 25px;
-  display:flex;
-  align-items:center;
-  gap:18px;
-  border-right:1px solid #e1eaf2;
-}
-
-.z-trust-icon{
-  width:65px;
-  height:65px;
-  border-radius:50%;
-  background:#e4f0ff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:32px;
-}
-
-.z-trust-title{
-  font-size:20px;
-  font-weight:800;
-  color:#102a43;
-}
-
-.z-trust-text{
-  font-size:15px;
-  color:#526779;
-  margin-top:5px;
-}
-
-.z-hero-premium{
-  min-height:630px;
-  background:linear-gradient(135deg,#32115f 0%,#54218c 45%,#7b3db5 100%);
-  position:relative;
-  overflow:hidden;
-  color:#fff;
-}
-
-.z-hero-inner{
-  max-width:1250px;
-  min-height:630px;
-  margin:auto;
-  padding:65px 28px;
-  display:flex;
-  align-items:center;
-  position:relative;
-}
-
-.z-hero-content{
-  width:52%;
-  position:relative;
-  z-index:5;
-}
-
-.z-hero-content h1{
-  font-size:70px;
-  line-height:1.02;
-  margin-bottom:25px;
-  font-weight:900;
-}
-
-.z-hero-content p{
-  font-size:23px;
-  line-height:1.5;
-  max-width:620px;
-  margin-bottom:30px;
-}
-
-.z-wa-main{
-  display:inline-block;
-  background:#16b94b;
-  color:#fff;
-  text-decoration:none;
-  font-size:20px;
-  font-weight:800;
-  padding:17px 30px;
-  border-radius:10px;
-}
-
-.z-services-mini{
-  display:flex;
-  gap:35px;
-  margin-top:55px;
-}
-
-.z-mini-item{
-  text-align:center;
-  width:95px;
-}
-
-.z-mini-icon{
-  width:62px;
-  height:62px;
-  border-radius:50%;
-  background:rgba(255,255,255,.13);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:30px;
-  margin:auto auto 10px;
-}
-
-.z-mini-item span{
-  font-size:14px;
-  font-weight:700;
-  line-height:1.25;
-  display:block;
-}
-
-.z-sofa{
-  position:absolute;
-  right:30px;
-  bottom:0;
-  width:570px;
-  height:285px;
-  background:#54206f;
-  border-radius:45px 45px 20px 20px;
-  box-shadow:0 25px 35px rgba(0,0,0,.30);
-}
-
-.z-sofa:before{
-  content:"";
-  position:absolute;
-  left:55px;
-  right:55px;
-  top:55px;
-  height:125px;
-  background:#682986;
-  border-radius:25px;
-  box-shadow:
-    inset 0 -8px 0 rgba(0,0,0,.10);
-}
-
-.z-sofa:after{
-  content:"";
-  position:absolute;
-  left:95px;
-  right:95px;
-  bottom:-25px;
-  height:30px;
-  background:#24122f;
-  border-radius:50%;
-  filter:blur(4px);
-}
-
-.z-cushion{
-  position:absolute;
-  width:150px;
-  height:105px;
-  background:#743b91;
-  border-radius:18px;
-  top:75px;
-}
-
-.z-cushion.one{
-  left:95px;
-}
-
-.z-cushion.two{
-  right:95px;
-}
-
-.z-table{
-  position:absolute;
-  right:145px;
-  bottom:-35px;
-  width:230px;
-  height:65px;
-  background:#c99b68;
-  border-radius:50%;
-  z-index:8;
-}
-
-.z-plant{
-  position:absolute;
-  right:0;
-  bottom:0;
-  font-size:105px;
-  z-index:9;
-}
-
-@media(max-width:1000px){
-  .z-premium-nav{
-    flex-wrap:wrap;
-    padding:18px;
-  }
-
-  .z-nav-links{
-    order:3;
-    width:100%;
-    justify-content:center;
-    flex-wrap:wrap;
-  }
-
-  .z-trust-inner{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .z-hero-content{
-    width:100%;
-  }
-
-  .z-sofa{
-    opacity:.35;
-    right:-150px;
-  }
-}
-
-@media(max-width:650px){
-  .z-brand{
-    min-width:0;
-  }
-
-  .z-brand-main{
-    font-size:32px;
-  }
-
-  .z-nav-links{
-    gap:12px;
-  }
-
-  .z-nav-links a{
-    font-size:13px;
-  }
-
-  .z-trust-inner{
-    grid-template-columns:1fr;
-  }
-
-  .z-hero-content h1{
-    font-size:48px;
-  }
-
-  .z-hero-content p{
-    font-size:18px;
-  }
-
-  .z-services-mini{
-    gap:10px;
-    flex-wrap:wrap;
-  }
-}
-</style>
-
-<header class="z-premium-header">
-  <div class="z-premium-nav">
-
-    <a href="#" class="z-brand">
-      <div class="z-brand-main">ZERQI<span>LO</span></div>
-      <div class="z-brand-sub">Home Cleaning Services</div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="#">
+      <div class="brand-main">ZERQI<span>LO</span></div>
+      <div class="brand-sub">Home Cleaning Services</div>
     </a>
 
-    <nav class="z-nav-links">
+    <nav class="nav">
       <a href="#services">Services</a>
       <a href="#why">Why ZERQILO</a>
       <a href="#booking">Book Now</a>
       <a href="#contact">Contact</a>
 
-      <a href="#" class="z-login"
-         onclick="zerqiloShowAuth('login'); return false;">
-         Login
-      </a>
-
-      <a href="#" class="z-create"
-         onclick="zerqiloShowAuth('signup'); return false;">
-         Create Account
-      </a>
-
-      <a href="tel:+919503140757" class="z-call">
-        ☎️ Call Now
-      </a>
-
-   <a href="https://wa.me/919503140757" class="z-whatsapp" target="_blank">
-  WhatsApp
-</a>   
+      <a href="#" class="pill login" onclick="zerqiloShowAuth('login');return false;">Login</a>
+      <a href="#" class="pill create" onclick="zerqiloShowAuth('signup');return false;">Create Account</a>
+      <a href="tel:+919503140757" class="pill call">☎ Call Now</a>
+      <a href="https://wa.me/919503140757" target="_blank" class="pill whatsapp">◉ WhatsApp</a>
     </nav>
-
   </div>
 </header>
 
-<section class="z-trust">
-  <div class="z-trust-inner">
-
-    <div class="z-trust-item">
-      <div class="z-trust-icon">♧</div>
-      <div>
-        <div class="z-trust-title">Trained Professionals</div>
-        <div class="z-trust-text">Service-focused team for home cleaning jobs</div>
+<section class="trust">
+  <div class="container trust-grid">
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg viewBox="0 0 48 48"><circle cx="17" cy="16" r="7"/><circle cx="32" cy="18" r="6"/><path d="M5 39c1-8 5-12 12-12s11 4 12 12M27 29c7-1 12 2 14 10"/></svg>
       </div>
+      <div><div class="trust-title">Trained Professionals</div><div class="trust-text">Service-focused team for home cleaning jobs.</div></div>
     </div>
-
-    <div class="z-trust-item">
-      <div class="z-trust-icon">✓</div>
-      <div>
-        <div class="z-trust-title">Quality Assured</div>
-        <div class="z-trust-text">We aim for visible, consistent cleaning results.</div>
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg viewBox="0 0 48 48"><path d="M24 5l15 6v11c0 10-6 17-15 21C15 39 9 32 9 22V11l15-6z"/><path d="m16 24 5 5 11-12"/></svg>
       </div>
+      <div><div class="trust-title">Quality Assured</div><div class="trust-text">We aim for visible, consistent cleaning results.</div></div>
     </div>
-
-    <div class="z-trust-item">
-      <div class="z-trust-icon">▣</div>
-      <div>
-        <div class="z-trust-title">Convenient Booking</div>
-        <div class="z-trust-text">Book quickly through WhatsApp or phone.</div>
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg viewBox="0 0 48 48"><rect x="8" y="11" width="32" height="30" rx="4"/><path d="M15 6v10M33 6v10M8 20h32M16 29h7M16 35h13"/></svg>
       </div>
+      <div><div class="trust-title">Convenient Booking</div><div class="trust-text">Book quickly through WhatsApp or phone.</div></div>
     </div>
-
-    <div class="z-trust-item">
-      <div class="z-trust-icon">⌖</div>
-      <div>
-        <div class="z-trust-title">Pune Service Area</div>
-        <div class="z-trust-text">Home-service model for Pune and nearby areas.</div>
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg viewBox="0 0 48 48"><path d="M24 43s14-13 14-24A14 14 0 1 0 10 19c0 11 14 24 14 24z"/><circle cx="24" cy="19" r="4"/></svg>
       </div>
+      <div><div class="trust-title">Pune Service Area</div><div class="trust-text">Home-service model for Pune and nearby areas.</div></div>
     </div>
-
   </div>
 </section>
 
-<section class="z-hero-premium">
-  <div class="z-hero-inner">
+<section class="hero" id="booking">
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <h1>Book Your<br>Cleaning</h1>
+      <p>Tell us what you need. We’ll contact you with the next steps and quotation.</p>
 
-    <div class="z-hero-content">
-
-      <h1>
-        Clean Spaces.<br>
-        Better Living.
-      </h1>
-
-      <p>
-        Professional home cleaning services for sofas,
-        mattresses, carpets, bathrooms and vacant flats —
-        at your convenience.
-      </p>
-
-      <a href="https://wa.me/919503140757"
-         target="_blank"
-         class="z-wa-main">
-         ◉ WhatsApp Booking
+      <a class="hero-cta" href="https://wa.me/919503140757" target="_blank">
+        <svg viewBox="0 0 32 32"><path d="M27 5A13 13 0 0 0 6 23L4 29l6-2a13 13 0 1 0 17-22z"/><path d="M12 11c1 4 5 8 9 9"/></svg>
+        WhatsApp Booking
       </a>
 
-      <div class="z-services-mini">
-
-        <div class="z-mini-item">
-          <div class="z-mini-icon">▰</div>
-          <span>Sofa<br>Cleaning</span>
-        </div>
-
-        <div class="z-mini-item">
-          <div class="z-mini-icon">▤</div>
-          <span>Mattress<br>Cleaning</span>
-        </div>
-
-        <div class="z-mini-item">
-          <div class="z-mini-icon">◒</div>
-          <span>Carpet<br>Cleaning</span>
-        </div>
-
-        <div class="z-mini-item">
-          <div class="z-mini-icon">♧</div>
-          <span>Bathroom<br>Cleaning</span>
-        </div>
-
-        <div class="z-mini-item">
-          <div class="z-mini-icon">⌂</div>
-          <span>Vacant Flat<br>Cleaning</span>
-        </div>
-
+      <div class="mini-services">
+        <div class="mini"><div class="mini-icon">🛋️</div><span>Sofa<br>Cleaning</span></div>
+        <div class="mini"><div class="mini-icon">🛏️</div><span>Mattress<br>Cleaning</span></div>
+        <div class="mini"><div class="mini-icon">🧹</div><span>Carpet<br>Cleaning</span></div>
+        <div class="mini"><div class="mini-icon">🚿</div><span>Bathroom<br>Cleaning</span></div>
+        <div class="mini"><div class="mini-icon">🏠</div><span>Vacant Flat<br>Cleaning</span></div>
       </div>
-
     </div>
 
-    <div class="z-sofa">
-      <div class="z-cushion one"></div>
-      <div class="z-cushion two"></div>
-      <div class="z-table"></div>
-      <div class="z-plant">🌿</div>
-    </div>
-
+    <div class="hero-visual" aria-label="ZERQILO living room cleaning visual"></div>
   </div>
 </section>
-<main>
 
-<section id="services">
+<section id="services" class="section">
   <div class="container">
     <div class="section-head">
-      <h2>Our Services</h2>
-      <p>Focused services today. More home services can be added as ZERQILO grows.</p>
+      <h2>Our Cleaning Services</h2>
+      <p>Professional home cleaning services for a healthier and happier home.</p>
     </div>
-    <div class="services">
-      <div class="service"><div class="icon">🛋️</div><h3>Sofa Cleaning</h3><p>Deep cleaning for sofas and upholstery.</p></div>
-      <div class="service"><div class="icon">🛏️</div><h3>Mattress Cleaning</h3><p>Fresh, hygienic mattress cleaning at home.</p></div>
-      <div class="service"><div class="icon">🧹</div><h3>Carpet Cleaning</h3><p>Deep cleaning for residential carpets.</p></div>
-      <div class="service"><div class="icon">🚿</div><h3>Bathroom Deep Cleaning</h3><p>Detailed bathroom cleaning and sanitisation.</p></div>
-      <div class="service"><div class="icon">🏠</div><h3>Vacant Flat Cleaning</h3><p>Move-in and move-out cleaning for empty flats.</p></div>
+
+    <div class="services-grid">
+      <article class="service-card"><div class="service-icon">🛋️</div><h3>Sofa Cleaning</h3><p>Deep cleaning for sofas and upholstery.</p></article>
+      <article class="service-card"><div class="service-icon">🛏️</div><h3>Mattress Cleaning</h3><p>Fresh, hygienic mattress cleaning at home.</p></article>
+      <article class="service-card"><div class="service-icon">🧹</div><h3>Carpet Cleaning</h3><p>Deep cleaning for residential carpets.</p></article>
+      <article class="service-card"><div class="service-icon">🚿</div><h3>Bathroom Cleaning</h3><p>Detailed bathroom cleaning for better hygiene.</p></article>
+      <article class="service-card"><div class="service-icon">🏠</div><h3>Vacant Flat Cleaning</h3><p>Move-in and move-out cleaning for empty flats.</p></article>
     </div>
   </div>
 </section>
 
-<section id="why" class="why">
+<section id="why" class="section why">
   <div class="container">
     <div class="section-head">
       <h2>Why Choose ZERQILO?</h2>
       <p>Simple booking. Professional service. Clear communication.</p>
     </div>
-    <div class="features">
-      <div class="feature"><strong>✓ Trained Professionals</strong><p>Service-focused team for home cleaning jobs.</p></div>
-      <div class="feature"><strong>✓ Quality Assured</strong><p>We aim for visible, consistent cleaning results.</p></div>
-      <div class="feature"><strong>✓ Convenient Booking</strong><p>Book quickly through WhatsApp or phone.</p></div>
-      <div class="feature"><strong>✓ Pune Service Area</strong><p>Home-service model for Pune and nearby areas.</p></div>
+    <div class="why-grid">
+      <div class="why-card"><strong>✓ Trained Professionals</strong><p>Service-focused team for home cleaning jobs.</p></div>
+      <div class="why-card"><strong>✓ Quality Assured</strong><p>We aim for visible, consistent cleaning results.</p></div>
+      <div class="why-card"><strong>✓ Convenient Booking</strong><p>Book quickly through WhatsApp or phone.</p></div>
+      <div class="why-card"><strong>✓ Pune Service Area</strong><p>Home-service model for Pune and nearby areas.</p></div>
     </div>
   </div>
 </section>
 
-
-</main>
+<section id="contact" class="section contact">
+  <div class="container contact-inner">
+    <div>
+      <h2>Ready to book your cleaning?</h2>
+      <p>Contact ZERQILO for service availability and quotation.</p>
+    </div>
+    <div class="contact-actions">
+      <a class="pill call" href="tel:+919503140757">☎ Call Now</a>
+      <a class="pill whatsapp" href="https://wa.me/919503140757" target="_blank">◉ WhatsApp</a>
+    </div>
+  </div>
+</section>
 
 <footer>
-  <div class="container footer-grid">
+  <div class="container footer-inner">
     <div><strong>ZERQILO Home Cleaning Services</strong><div class="small">Clean Spaces. Better Living.</div></div>
     <div><strong>+91 95031 40757</strong><div class="small">Pune City & Nearby Areas</div></div>
   </div>
 </footer>
 
-<script>
-function sendWhatsApp(e){
-  e.preventDefault();
-  const name=document.getElementById('name').value;
-  const service=document.getElementById('service').value;
-  const location=document.getElementById('location').value;
-  const date=document.getElementById('date').value;
-  const details=document.getElementById('details').value;
-  const msg=`Hello ZERQILO,%0A%0AName: ${encodeURIComponent(name)}%0AService: ${encodeURIComponent(service)}%0ALocation: ${encodeURIComponent(location)}%0APreferred Date/Time: ${encodeURIComponent(date)}%0ADetails: ${encodeURIComponent(details)}`;
-  window.open('https://wa.me/919503140757?text='+msg,'_blank');
-}
-</script>
- 
-<div id="zerqiloAuthModal" style="
-display:none;
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.55);
-z-index:9999;
-align-items:center;
-justify-content:center;
-">
+<!-- AUTH MODAL: existing ZERQILO authentication preserved -->
+<div id="zerqiloAuthModal">
+  <div class="auth-box">
+    <h2 id="zerqiloAuthTitle">Login to ZERQILO</h2>
 
-<div style="
-background:white;
-width:min(420px,90%);
-padding:28px;
-border-radius:20px;
-box-shadow:0 20px 60px rgba(0,0,0,.25);
-">
+    <input id="zerqiloName" type="text" placeholder="Full Name" style="display:none">
+    <input id="zerqiloEmail" type="email" placeholder="Email Address">
+    <input id="zerqiloPassword" type="password" placeholder="Password">
 
-<h2 id="zerqiloAuthTitle">Login</h2>
+    <button class="auth-primary" onclick="zerqiloSubmitAuth()">Continue</button>
+    <button class="auth-close" onclick="zerqiloCloseAuth()">Close</button>
 
-<input
-id="zerqiloName"
-type="text"
-placeholder="Full Name"
-style="display:none;width:100%;padding:13px;margin:8px 0;border:1px solid #ddd;border-radius:8px;box-sizing:border-box;"
->
-
-<input
-id="zerqiloEmail"
-type="email"
-placeholder="Email Address"
-style="width:100%;padding:13px;margin:8px 0;border:1px solid #ddd;border-radius:8px;box-sizing:border-box;"
->
-
-<input
-id="zerqiloPassword"
-type="password"
-placeholder="Password"
-style="width:100%;padding:13px;margin:8px 0;border:1px solid #ddd;border-radius:8px;box-sizing:border-box;"
->
-
-<button
-onclick="zerqiloSubmitAuth()"
-style="
-width:100%;
-padding:13px;
-margin-top:10px;
-border:0;
-border-radius:9px;
-background:#073b63;
-color:white;
-font-weight:700;
-cursor:pointer;
-">
-Continue
-</button>
-
-<button
-onclick="zerqiloCloseAuth()"
-style="
-width:100%;
-padding:11px;
-margin-top:8px;
-border:1px solid #ddd;
-border-radius:9px;
-background:white;
-cursor:pointer;
-">
-Close
-</button>
-
-<p id="zerqiloAuthMessage" style="margin-top:12px;font-size:14px;"></p>
-
-</div>
+    <p id="zerqiloAuthMessage" style="margin-top:12px;font-size:14px"></p>
+  </div>
 </div>
 
 <script>
-
 let zerqiloAuthMode = "login";
 
-function zerqiloShowAuth(mode) {
-
-zerqiloAuthMode = mode;
-
-document.getElementById("zerqiloAuthModal").style.display = "flex";
-
-document.getElementById("zerqiloAuthTitle").textContent =
-mode === "login" ? "Login to ZERQILO" : "Create ZERQILO Account";
-
-document.getElementById("zerqiloName").style.display =
-mode === "signup" ? "block" : "none";
-
-document.getElementById("zerqiloAuthMessage").textContent = "";
-
+function zerqiloShowAuth(mode){
+  zerqiloAuthMode = mode;
+  document.getElementById("zerqiloAuthModal").style.display = "flex";
+  document.getElementById("zerqiloAuthTitle").textContent =
+    mode === "login" ? "Login to ZERQILO" : "Create ZERQILO Account";
+  document.getElementById("zerqiloName").style.display =
+    mode === "signup" ? "block" : "none";
+  document.getElementById("zerqiloAuthMessage").textContent = "";
 }
 
-function zerqiloCloseAuth() {
-
-document.getElementById("zerqiloAuthModal").style.display = "none";
-
+function zerqiloCloseAuth(){
+  document.getElementById("zerqiloAuthModal").style.display = "none";
 }
 
-async function zerqiloSubmitAuth() {
+async function zerqiloSubmitAuth(){
+  const email = document.getElementById("zerqiloEmail").value.trim();
+  const password = document.getElementById("zerqiloPassword").value;
+  const name = document.getElementById("zerqiloName").value.trim();
+  const message = document.getElementById("zerqiloAuthMessage");
 
-const email =
-document.getElementById("zerqiloEmail").value.trim();
-
-const password =
-document.getElementById("zerqiloPassword").value;
-
-const name =
-document.getElementById("zerqiloName").value.trim();
-
-const message =
-document.getElementById("zerqiloAuthMessage");
-
-if (!email || !password) {
-
-message.textContent = "Please enter email and password.";
-return;
-
-}
-
-message.textContent = "Please wait...";
-
-if (zerqiloAuthMode === "signup") {
-
-if (!name) {
-
-message.textContent = "Please enter your full name.";
-return;
-
-}
-
-const { data, error } =
-await supabaseClient.auth.signUp({
-email: email,
-password: password,
-options: {
-data: {
-full_name: name
-}
-}
-});
-
-if (error) {
-
-message.textContent = error.message;
-return;
-
-}
-
-message.textContent =
-"Account created. Please check your email for confirmation.";
-
-} else {
-
-const { data, error } =
-await supabaseClient.auth.signInWithPassword({
-email: email,
-password: password
-});
-
-if (error) {
-
-message.textContent = error.message;
-return;
-
-}
-
-message.textContent = "Login successful.";
-
-setTimeout(() => {
-zerqiloCloseAuth();
-}, 1000);
-
-}
-
-}
-
-</script>
- <script>
-
-async function zerqiloSyncCustomerProfile(user) {
-
-  if (!user) return;
-
-  const fullName =
-    user.user_metadata?.full_name || "";
-
-  const email =
-    user.email || "";
-
-  const { error } =
-    await supabaseClient
-      .from("customers")
-      .upsert(
-        {
-          auth_user_id: user.id,
-          name: fullName,
-          email: email
-        },
-        {
-          onConflict: "auth_user_id"
-        }
-      );
-
-  if (error) {
-
-    console.error(
-      "ZERQILO profile sync error:",
-      error
-    );
-
-  } else {
-
-    console.log(
-      "ZERQILO customer profile synced."
-    );
-
+  if(!email || !password){
+    message.textContent = "Please enter email and password.";
+    return;
   }
 
-}
+  message.textContent = "Please wait...";
 
-supabaseClient.auth.onAuthStateChange(
-  (event, session) => {
-
-    if (
-      event === "SIGNED_IN" &&
-      session?.user
-    ) {
-
-      setTimeout(() => {
-        zerqiloSyncCustomerProfile(
-          session.user
-        );
-      }, 0);
-
+  if(zerqiloAuthMode === "signup"){
+    if(!name){
+      message.textContent = "Please enter your full name.";
+      return;
     }
 
-  }
-);
+    const {error} = await supabaseClient.auth.signUp({
+      email,
+      password,
+      options:{data:{full_name:name}}
+    });
 
-</script> 
+    if(error){
+      message.textContent = error.message;
+      return;
+    }
+
+    message.textContent =
+      "Account created. Please check your email for confirmation.";
+  }else{
+    const {error} = await supabaseClient.auth.signInWithPassword({
+      email,password
+    });
+
+    if(error){
+      message.textContent = error.message;
+      return;
+    }
+
+    message.textContent = "Login successful.";
+    setTimeout(zerqiloCloseAuth,1000);
+  }
+}
+
+async function zerqiloSyncCustomerProfile(user){
+  if(!user) return;
+
+  const fullName = user.user_metadata?.full_name || "";
+  const email = user.email || "";
+
+  const {error} = await supabaseClient
+    .from("customers")
+    .upsert(
+      {auth_user_id:user.id,name:fullName,email:email},
+      {onConflict:"auth_user_id"}
+    );
+
+  if(error) console.error("ZERQILO profile sync error:",error);
+  else console.log("ZERQILO customer profile synced.");
+}
+
+supabaseClient.auth.onAuthStateChange((event,session)=>{
+  if(event === "SIGNED_IN" && session?.user){
+    setTimeout(()=>zerqiloSyncCustomerProfile(session.user),0);
+  }
+});
+</script>
+
 </body>
 </html>
