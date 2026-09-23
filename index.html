@@ -403,6 +403,69 @@ zerqiloCloseAuth();
 
 }
 
+</script>
+ <script>
+
+async function zerqiloSyncCustomerProfile(user) {
+
+  if (!user) return;
+
+  const fullName =
+    user.user_metadata?.full_name || "";
+
+  const email =
+    user.email || "";
+
+  const { error } =
+    await supabaseClient
+      .from("customers")
+      .upsert(
+        {
+          auth_user_id: user.id,
+          name: fullName,
+          email: email
+        },
+        {
+          onConflict: "auth_user_id"
+        }
+      );
+
+  if (error) {
+
+    console.error(
+      "ZERQILO profile sync error:",
+      error
+    );
+
+  } else {
+
+    console.log(
+      "ZERQILO customer profile synced."
+    );
+
+  }
+
+}
+
+supabaseClient.auth.onAuthStateChange(
+  (event, session) => {
+
+    if (
+      event === "SIGNED_IN" &&
+      session?.user
+    ) {
+
+      setTimeout(() => {
+        zerqiloSyncCustomerProfile(
+          session.user
+        );
+      }, 0);
+
+    }
+
+  }
+);
+
 </script> 
 </body>
 </html>
