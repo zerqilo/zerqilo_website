@@ -75,56 +75,488 @@ footer{background:#052e4d;color:#d9e7f1;padding:32px 0}
 </style>
 </head>
 <body>
-<header>
-  <div class="container nav">
+<style>
+.z-premium-header{
+  background:#fff;
+  border-bottom:1px solid #e8edf3;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
 
-    <a class="logo" href="#">ZERQI<span>LO</span></a>
+.z-premium-nav{
+  max-width:1250px;
+  margin:auto;
+  min-height:92px;
+  padding:0 28px;
+  display:flex;
+  align-items:center;
+  gap:35px;
+}
 
-    <nav>
+.z-brand{
+  text-decoration:none;
+  min-width:285px;
+}
+
+.z-brand-main{
+  font-size:42px;
+  font-weight:900;
+  letter-spacing:2px;
+  color:#073b63;
+  line-height:1;
+}
+
+.z-brand-main span{
+  color:#159447;
+}
+
+.z-brand-sub{
+  font-size:17px;
+  color:#17324a;
+  margin-top:5px;
+}
+
+.z-nav-links{
+  display:flex;
+  align-items:center;
+  gap:30px;
+  flex:1;
+}
+
+.z-nav-links a{
+  text-decoration:none;
+  color:#102a43;
+  font-size:16px;
+  font-weight:600;
+}
+
+.z-nav-links a:hover{
+  color:#075b96;
+}
+
+.z-login{
+  background:#1264a3;
+  color:#fff !important;
+  padding:15px 25px;
+  border-radius:10px;
+}
+
+.z-create{
+  background:#1264a3;
+  color:#fff !important;
+  padding:15px 25px;
+  border-radius:10px;
+}
+
+.z-call{
+  background:#19a64a;
+  color:#fff !important;
+  padding:15px 25px;
+  border-radius:10px;
+}
+
+.z-whatsapp{
+  background:#0b9140;
+  color:#fff !important;
+  padding:15px 25px;
+  border-radius:10px;
+}
+
+.z-trust{
+  background:#f4f9fd;
+  border-bottom:1px solid #e1eaf2;
+}
+
+.z-trust-inner{
+  max-width:1250px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+}
+
+.z-trust-item{
+  padding:25px 25px;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  border-right:1px solid #e1eaf2;
+}
+
+.z-trust-icon{
+  width:65px;
+  height:65px;
+  border-radius:50%;
+  background:#e4f0ff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:32px;
+}
+
+.z-trust-title{
+  font-size:20px;
+  font-weight:800;
+  color:#102a43;
+}
+
+.z-trust-text{
+  font-size:15px;
+  color:#526779;
+  margin-top:5px;
+}
+
+.z-hero-premium{
+  min-height:630px;
+  background:linear-gradient(135deg,#32115f 0%,#54218c 45%,#7b3db5 100%);
+  position:relative;
+  overflow:hidden;
+  color:#fff;
+}
+
+.z-hero-inner{
+  max-width:1250px;
+  min-height:630px;
+  margin:auto;
+  padding:65px 28px;
+  display:flex;
+  align-items:center;
+  position:relative;
+}
+
+.z-hero-content{
+  width:52%;
+  position:relative;
+  z-index:5;
+}
+
+.z-hero-content h1{
+  font-size:70px;
+  line-height:1.02;
+  margin-bottom:25px;
+  font-weight:900;
+}
+
+.z-hero-content p{
+  font-size:23px;
+  line-height:1.5;
+  max-width:620px;
+  margin-bottom:30px;
+}
+
+.z-wa-main{
+  display:inline-block;
+  background:#16b94b;
+  color:#fff;
+  text-decoration:none;
+  font-size:20px;
+  font-weight:800;
+  padding:17px 30px;
+  border-radius:10px;
+}
+
+.z-services-mini{
+  display:flex;
+  gap:35px;
+  margin-top:55px;
+}
+
+.z-mini-item{
+  text-align:center;
+  width:95px;
+}
+
+.z-mini-icon{
+  width:62px;
+  height:62px;
+  border-radius:50%;
+  background:rgba(255,255,255,.13);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  margin:auto auto 10px;
+}
+
+.z-mini-item span{
+  font-size:14px;
+  font-weight:700;
+  line-height:1.25;
+  display:block;
+}
+
+.z-sofa{
+  position:absolute;
+  right:30px;
+  bottom:0;
+  width:570px;
+  height:285px;
+  background:#54206f;
+  border-radius:45px 45px 20px 20px;
+  box-shadow:0 25px 35px rgba(0,0,0,.30);
+}
+
+.z-sofa:before{
+  content:"";
+  position:absolute;
+  left:55px;
+  right:55px;
+  top:55px;
+  height:125px;
+  background:#682986;
+  border-radius:25px;
+  box-shadow:
+    inset 0 -8px 0 rgba(0,0,0,.10);
+}
+
+.z-sofa:after{
+  content:"";
+  position:absolute;
+  left:95px;
+  right:95px;
+  bottom:-25px;
+  height:30px;
+  background:#24122f;
+  border-radius:50%;
+  filter:blur(4px);
+}
+
+.z-cushion{
+  position:absolute;
+  width:150px;
+  height:105px;
+  background:#743b91;
+  border-radius:18px;
+  top:75px;
+}
+
+.z-cushion.one{
+  left:95px;
+}
+
+.z-cushion.two{
+  right:95px;
+}
+
+.z-table{
+  position:absolute;
+  right:145px;
+  bottom:-35px;
+  width:230px;
+  height:65px;
+  background:#c99b68;
+  border-radius:50%;
+  z-index:8;
+}
+
+.z-plant{
+  position:absolute;
+  right:0;
+  bottom:0;
+  font-size:105px;
+  z-index:9;
+}
+
+@media(max-width:1000px){
+  .z-premium-nav{
+    flex-wrap:wrap;
+    padding:18px;
+  }
+
+  .z-nav-links{
+    order:3;
+    width:100%;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+
+  .z-trust-inner{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .z-hero-content{
+    width:100%;
+  }
+
+  .z-sofa{
+    opacity:.35;
+    right:-150px;
+  }
+}
+
+@media(max-width:650px){
+  .z-brand{
+    min-width:0;
+  }
+
+  .z-brand-main{
+    font-size:32px;
+  }
+
+  .z-nav-links{
+    gap:12px;
+  }
+
+  .z-nav-links a{
+    font-size:13px;
+  }
+
+  .z-trust-inner{
+    grid-template-columns:1fr;
+  }
+
+  .z-hero-content h1{
+    font-size:48px;
+  }
+
+  .z-hero-content p{
+    font-size:18px;
+  }
+
+  .z-services-mini{
+    gap:10px;
+    flex-wrap:wrap;
+  }
+}
+</style>
+
+<header class="z-premium-header">
+  <div class="z-premium-nav">
+
+    <a href="#" class="z-brand">
+      <div class="z-brand-main">ZERQI<span>LO</span></div>
+      <div class="z-brand-sub">Home Cleaning Services</div>
+    </a>
+
+    <nav class="z-nav-links">
       <a href="#services">Services</a>
       <a href="#why">Why ZERQILO</a>
       <a href="#booking">Book Now</a>
+      <a href="#contact">Contact</a>
 
-      <a class="btn btn-blue" href="#"
+      <a href="#" class="z-login"
          onclick="zerqiloShowAuth('login'); return false;">
-        Login
+         Login
       </a>
 
-      <a class="btn btn-blue" href="#"
+      <a href="#" class="z-create"
          onclick="zerqiloShowAuth('signup'); return false;">
-        Create Account
+         Create Account
       </a>
+
+      <a href="tel:+919503140757" class="z-call">
+        ☎️ Call Now
+      </a>
+
+   <a href="https://wa.me/919503140757" class="z-whatsapp" target="_blank">
+  WhatsApp
+</a>   
     </nav>
 
   </div>
 </header>
-<main>
-<section class="hero">
-  <div class="container hero-grid">
-    <div>
-      <div class="badge">Pune Home Cleaning Services</div>
-      <h1>Clean Spaces.<br><span>Better Living.</span></h1>
-      <p>Professional home cleaning services for sofas, mattresses, carpets, bathrooms and vacant flats — at your convenience.</p>
-      <div class="actions">
-    <a class="btn btn-blue" href="tel:+919503140757">Call Now</a>
 
-    <a class="btn btn-green"
-       href="https://wa.me/919503140757?text=Hello%20ZERQILO%2C%20I%20want%20to%20book%20a%20cleaning%20service."
-       target="_blank">
-       WhatsApp
-    </a>
-</div>
-    </div>
-    <div class="hero-card">
-      <h3>Quick Booking</h3>
-      <div class="quick">
-        <div>🛋️ Sofa</div><div>🛏️ Mattress</div>
-        <div>🧹 Carpet</div><div>🚿 Bathroom</div>
-        <div>🏠 Vacant Flat</div><div>📍 Pune & Nearby</div>
+<section class="z-trust">
+  <div class="z-trust-inner">
+
+    <div class="z-trust-item">
+      <div class="z-trust-icon">♧</div>
+      <div>
+        <div class="z-trust-title">Trained Professionals</div>
+        <div class="z-trust-text">Service-focused team for home cleaning jobs</div>
       </div>
     </div>
+
+    <div class="z-trust-item">
+      <div class="z-trust-icon">✓</div>
+      <div>
+        <div class="z-trust-title">Quality Assured</div>
+        <div class="z-trust-text">We aim for visible, consistent cleaning results.</div>
+      </div>
+    </div>
+
+    <div class="z-trust-item">
+      <div class="z-trust-icon">▣</div>
+      <div>
+        <div class="z-trust-title">Convenient Booking</div>
+        <div class="z-trust-text">Book quickly through WhatsApp or phone.</div>
+      </div>
+    </div>
+
+    <div class="z-trust-item">
+      <div class="z-trust-icon">⌖</div>
+      <div>
+        <div class="z-trust-title">Pune Service Area</div>
+        <div class="z-trust-text">Home-service model for Pune and nearby areas.</div>
+      </div>
+    </div>
+
   </div>
 </section>
+
+<section class="z-hero-premium">
+  <div class="z-hero-inner">
+
+    <div class="z-hero-content">
+
+      <h1>
+        Clean Spaces.<br>
+        Better Living.
+      </h1>
+
+      <p>
+        Professional home cleaning services for sofas,
+        mattresses, carpets, bathrooms and vacant flats —
+        at your convenience.
+      </p>
+
+      <a href="https://wa.me/919503140757"
+         target="_blank"
+         class="z-wa-main">
+         ◉ WhatsApp Booking
+      </a>
+
+      <div class="z-services-mini">
+
+        <div class="z-mini-item">
+          <div class="z-mini-icon">▰</div>
+          <span>Sofa<br>Cleaning</span>
+        </div>
+
+        <div class="z-mini-item">
+          <div class="z-mini-icon">▤</div>
+          <span>Mattress<br>Cleaning</span>
+        </div>
+
+        <div class="z-mini-item">
+          <div class="z-mini-icon">◒</div>
+          <span>Carpet<br>Cleaning</span>
+        </div>
+
+        <div class="z-mini-item">
+          <div class="z-mini-icon">♧</div>
+          <span>Bathroom<br>Cleaning</span>
+        </div>
+
+        <div class="z-mini-item">
+          <div class="z-mini-icon">⌂</div>
+          <span>Vacant Flat<br>Cleaning</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="z-sofa">
+      <div class="z-cushion one"></div>
+      <div class="z-cushion two"></div>
+      <div class="z-table"></div>
+      <div class="z-plant">🌿</div>
+    </div>
+
+  </div>
+</section>
+<main>
 
 <section id="services">
   <div class="container">
@@ -157,16 +589,7 @@ footer{background:#052e4d;color:#d9e7f1;padding:32px 0}
   </div>
 </section>
 
-<section id="booking" class="booking">
-  <div class="container booking-grid">
-    <div>
-      <h2>Book Your Cleaning</h2>
-      <p>Tell us what you need. We’ll contact you with the next steps and quotation.</p>
-      <a class="btn btn-green" href="https://wa.me/919503140757?text=Hello%20ZERQILO%2C%20I%20want%20to%20book%20a%20cleaning%20service." target="_blank">WhatsApp Booking</a>
-    </div>
-    
-  </div>
-</section>
+
 </main>
 
 <footer>
