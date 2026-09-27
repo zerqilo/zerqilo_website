@@ -472,11 +472,15 @@ async function zerqiloSubmitAuth(){
       return;
     }
 
+    
     const {error} = await supabaseClient.auth.signUp({
-      email,
-      password,
-      options:{data:{full_name:name}}
-    });
+  email,
+  password,
+  options:{
+    data:{full_name:name},
+    emailRedirectTo:"https://zerqilo.github.io/zerqilo_website/"
+  }
+});
 
     if(error){
       message.textContent = error.message;
