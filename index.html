@@ -525,7 +525,7 @@ supabaseClient.auth.onAuthStateChange((event,session)=>{
   if(event === "SIGNED_IN" && session?.user){
     setTimeout(()=>zerqiloSyncCustomerProfile(session.user),0);
   }
-});
+}); 
 </script>
 
 </body>
