@@ -544,8 +544,8 @@ supabaseClient.auth.onAuthStateChange((event,session)=>{
       <div class="service-icon">🧹</div>
       <h3>${service.name}</h3>
       <p>${service.description || ""}</p>
-      ${service.price ? <strong>₹${service.price}</strong> : ""}
-      ${service.unit ? <small>${service.unit}</small> : ""}
+     ${service.price ? `<strong>₹${service.price}</strong>` : ""}
+${service.unit ? `<small>${service.unit}</small>` : ""} 
       <br>
       <button type="button" onclick="startBooking('${service.id}')">
         Book Now
