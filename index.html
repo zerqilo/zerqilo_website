@@ -302,7 +302,7 @@ footer{background:#052e4d;color:#d9e7f1;padding:30px 0}
     </a>
 
     <nav class="nav">
-      <a href="#services">Services</a>
+     <a href="#services" onclick="toggleZerqiloServices(); return false;">Services</a> 
       <a href="#why">Why ZERQILO</a>
       <a href="#booking">Book Now</a>
       <a href="#contact">Contact</a>
@@ -521,7 +521,53 @@ supabaseClient.auth.onAuthStateChange((event,session)=>{
   if(event === "SIGNED_IN" && session?.user){
     setTimeout(()=>zerqiloSyncCustomerProfile(session.user),0);
   }
-}); 
+});
+  async function loadZerqiloServices() {
+  const list = document.getElementById("zerqilo-services-list");
+
+  if (!list) return;
+
+  const { data, error } = await supabaseClient
+    .from("services")
+    .select("id,name,description,price,active,unit,duration_minutes")
+    .eq("active", true)
+    .order("sort_order", { ascending: true });
+
+  if (error) {
+    console.error("ZERQILO services error:", error);
+    list.innerHTML = "<p>Services load होत नाहीत.</p>";
+    return;
+  }
+
+  list.innerHTML = data.map(service => `
+    <article class="service-card">
+      <div class="service-icon">🧹</div>
+      <h3>${service.name}</h3>
+      <p>${service.description || ""}</p>
+      ${service.price ? <strong>₹${service.price}</strong> : ""}
+      ${service.unit ? <small>${service.unit}</small> : ""}
+      <br>
+      <button type="button" onclick="startBooking('${service.id}')">
+        Book Now
+      </button>
+    </article>
+  `).join("");
+}
+
+loadZerqiloServices();
+ function toggleZerqiloServices() {
+  const list = document.getElementById("zerqilo-services-list");
+
+  if (!list) return;
+
+  if (list.innerHTML.trim() === "") {
+    loadZerqiloServices();
+  }
+
+  document.getElementById("services").scrollIntoView({
+    behavior: "smooth"
+  });
+} 
 </script>
 
 </body>
