@@ -567,7 +567,80 @@ loadZerqiloServices();
   document.getElementById("services").scrollIntoView({
     behavior: "smooth"
   });
-} 
+}let zerqiloCart = [];
+
+async function startBooking(serviceId) {
+
+  const { data, error } = await supabaseClient
+    .from("services")
+    .select("id,name,description,price,unit,duration_minutes")
+    .eq("id", serviceId)
+    .single();
+
+  if (error) {
+    console.error("Booking service error:", error);
+    alert("Service select होत नाही.");
+    return;
+  }
+
+  zerqiloCart.push(data);
+
+  alert(data.name + " added to booking.");
+
+  console.log("ZERQILO CART:", zerqiloCart);
+}
+  function showBookingCart() {
+  if (zerqiloCart.length === 0) {
+    alert("Please select at least one service.");
+    return;
+  }
+
+  let total = zerqiloCart.reduce((sum, service) => {
+    return sum + (Number(service.price) || 0);
+  }, 0);
+
+  const cartHTML = `
+    <div id="zerqilo-booking-cart" style="padding:20px;">
+      <h2>Selected Services</h2>
+
+      ${zerqiloCart.map((service, index) => `
+        <div style="margin-bottom:15px;">
+          <strong>${service.name}</strong>
+          <span> ₹${service.price || 0}</span>
+          <button type="button" onclick="removeFromCart(${index})">
+            Remove
+          </button>
+        </div>
+      `).join("")}
+
+      <hr>
+
+      <h3>Total: ₹${total}</h3>
+
+      <button type="button" onclick="proceedToPayment()">
+        Proceed to Payment
+      </button>
+    </div>
+  `;
+
+  document.body.insertAdjacentHTML("beforeend", cartHTML);
+
+  document.getElementById("zerqilo-booking-cart")
+    .scrollIntoView({ behavior: "smooth" });
+}
+
+function removeFromCart(index) {
+  zerqiloCart.splice(index, 1);
+
+  const cart = document.getElementById("zerqilo-booking-cart");
+  if (cart) cart.remove();
+
+  showBookingCart();
+}
+
+function proceedToPayment() {
+  alert("Booking details and payment step will be connected next.");
+}
 </script>
 
 </body>
