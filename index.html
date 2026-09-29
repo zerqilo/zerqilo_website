@@ -616,12 +616,12 @@ async function startBooking(serviceId) {
     const totalPrice =
       sofaBase + poppyTotal + cushionTotal;
 
-    zerqiloCart.push({
+   zerqiloCart.push({
       ...data,
       quantity: seats,
       price: totalPrice,
       details:
-        ${seats} Regular Seats × ₹130 +
+        `${seats} Regular Seats × ₹130` +
         (poppy > 0
           ? ` + ${poppy} Poppy Seats × ₹75`
           : "") +
@@ -631,23 +631,12 @@ async function startBooking(serviceId) {
     });
 
     alert(
-      Sofa added to booking.\n\nTotal: ₹${totalPrice}
+      `Sofa added to booking.\n\nTotal: ₹${totalPrice}`
     );
 
     showBookingCart();
     return;
   }
-    showBookingCart();
-    return;
-  }
-
-  // OTHER SERVICES
-  zerqiloCart.push(data);
-
-  alert(data.name + " added to booking.");
-
-  showBookingCart();
-}
 
 function showBookingCart() {
 
