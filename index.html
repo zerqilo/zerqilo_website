@@ -637,7 +637,13 @@ async function startBooking(serviceId) {
     showBookingCart();
     return;
   }
+// OTHER SERVICES
+  zerqiloCart.push(data);
 
+  alert(data.name + " added to booking.");
+
+  showBookingCart();
+}
 function showBookingCart() {
 
   if (zerqiloCart.length === 0) {
