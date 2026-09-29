@@ -569,6 +569,7 @@ loadZerqiloServices();
   });
 }let zerqiloCart = [];
 
+
 async function startBooking(serviceId) {
 
   const { data, error } = await supabaseClient
@@ -579,22 +580,74 @@ async function startBooking(serviceId) {
 
   if (error) {
     console.error("Booking service error:", error);
-    alert("Service select होत नाही.");
+    alert("Unable to select service.");
     return;
   }
 
   // SOFA CLEANING
   if (data.name === "Sofa Cleaning") {
 
-    const seats = Number(prompt("Regular Sofa - किती seats?"));
+    const seats = Number(
+      prompt("Regular Sofa - How many seats?")
+    );
 
     if (!seats || seats < 1) {
-      alert("कृपया seats ची संख्या टाका.");
+      alert("Please enter a valid number of seats.");
       return;
     }
 
-    const poppy = Number
-  function showBookingCart() {
+    const poppy = Number(
+      prompt("Poppy - How many seats? (₹75 per seat)")
+    ) || 0;
+
+    if (poppy < 0) {
+      alert("Please enter a valid Poppy quantity.");
+      return;
+    }
+
+    const cushions = confirm(
+      "Do you want to add up to 5 cushions? (₹150)"
+    );
+
+    const sofaBase = seats * 130;
+    const poppyTotal = poppy * 75;
+    const cushionTotal = cushions ? 150 : 0;
+
+    const totalPrice =
+      sofaBase + poppyTotal + cushionTotal;
+
+    zerqiloCart.push({
+      ...data,
+      quantity: seats,
+      price: totalPrice,
+      details:
+        ${seats} Regular Seats × ₹130 +
+        (poppy > 0
+          ? ` + ${poppy} Poppy Seats × ₹75`
+          : "") +
+        (cushions
+          ? ` + Up to 5 Cushions ₹150`
+          : "")
+    });
+
+    alert(
+      Sofa added to booking.\n\nTotal: ₹${totalPrice}
+    );
+
+    showBookingCart();
+    return;
+  }
+
+  // OTHER SERVICES
+  zerqiloCart.push(data);
+
+  alert(data.name + " added to booking.");
+
+  showBookingCart();
+}
+
+function showBookingCart() {
+
   if (zerqiloCart.length === 0) {
     alert("Please select at least one service.");
     return;
@@ -634,6 +687,7 @@ async function startBooking(serviceId) {
     .scrollIntoView({ behavior: "smooth" });
 }
 
+ 
 function removeFromCart(index) {
   zerqiloCart.splice(index, 1);
 
