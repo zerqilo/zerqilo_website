@@ -583,13 +583,17 @@ async function startBooking(serviceId) {
     return;
   }
 
-  zerqiloCart.push(data);
+  // SOFA CLEANING
+  if (data.name === "Sofa Cleaning") {
 
-  alert(data.name + " added to booking.");
-  showBookingCart();
+    const seats = Number(prompt("Regular Sofa - किती seats?"));
 
-  console.log("ZERQILO CART:", zerqiloCart);
-}
+    if (!seats || seats < 1) {
+      alert("कृपया seats ची संख्या टाका.");
+      return;
+    }
+
+    const poppy = Number
   function showBookingCart() {
   if (zerqiloCart.length === 0) {
     alert("Please select at least one service.");
