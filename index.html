@@ -621,7 +621,7 @@ async function startBooking(serviceId) {
       quantity: seats,
       price: totalPrice,
       details:
-        ${seats} Regular Seats × ₹130 +
+        `${seats} Regular Seats × ₹130` +
         (poppy > 0
           ? ` + ${poppy} Poppy Seats × ₹75`
           : "") +
