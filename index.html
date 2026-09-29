@@ -635,7 +635,48 @@ async function startBooking(serviceId) {
     showBookingCart();
     return;
   }
+// MATTRESS CLEANING
+if (data.name === "Mattress Cleaning") {
 
+  const mattressType = prompt(
+    "Mattress Size निवडा:\n\n" +
+    "1 = Single Mattress - ₹250\n" +
+    "2 = Double Mattress - ₹500\n" +
+    "3 = King Size Mattress - ₹700\n\n" +
+    "1, 2 किंवा 3 टाका:"
+  );
+
+  let selectedPrice = 0;
+  let selectedType = "";
+
+  if (mattressType === "1") {
+    selectedPrice = 250;
+    selectedType = "Single Mattress";
+  } else if (mattressType === "2") {
+    selectedPrice = 500;
+    selectedType = "Double Mattress";
+  } else if (mattressType === "3") {
+    selectedPrice = 700;
+    selectedType = "King Size Mattress";
+  } else {
+    alert("कृपया 1, 2 किंवा 3 निवडा.");
+    return;
+  }
+
+  zerqiloCart.push({
+    ...data,
+    quantity: 1,
+    price: selectedPrice,
+    details: selectedType
+  });
+
+  alert(
+    ${selectedType} added to booking.\n\nTotal: ₹${selectedPrice}
+  );
+
+  showBookingCart();
+  return;
+}
   // CARPET CLEANING
   if (data.name === "Carpet Cleaning") {
 
