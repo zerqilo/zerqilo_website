@@ -875,25 +875,27 @@ async function startBooking(serviceId) {
         alert("Please select at least one option.");
         return;
       }
-
-      selected.forEach(item => {
+selected.forEach(item => {
 
         zerqiloCart.push({
           ...data,
           quantity: item.quantity,
           price: item.total,
-details:
-  item.name + " - " +
-  item.description + " - " +
-  item.quantity + " x ₹" +
-  item.price + " " +
-  item.unit
+          details:
+            item.name + " - " +
+            item.description + " - " +
+            item.quantity + " x ₹" +
+            item.price + " " +
+            item.unit
+        });
+
       });
 
-     box.remove();
+      box.remove();
+      showBookingCart();
 
     });
-});
+
 }
   
    let zerqiloCart = [];
