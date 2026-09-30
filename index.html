@@ -881,9 +881,12 @@ async function startBooking(serviceId) {
           ...data,
           quantity: item.quantity,
           price: item.total,
-        details:
-`${item.name} - ${item.description} - ${item.quantity} × ₹${item.price} ${item.unit}`  
-
+details:
+  item.name + " - " +
+  item.description + " - " +
+  item.quantity + " x ₹" +
+  item.price + " " +
+  item.unit
       });
 
       box.remove();
