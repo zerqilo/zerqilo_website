@@ -899,17 +899,217 @@ details:
 
 
  
-function removeFromCart(index) {
-  zerqiloCart.splice(index, 1);
+function showBookingCart() {
 
-  const cart = document.getElementById("zerqilo-booking-cart");
-  if (cart) cart.remove();
+  const oldCart = document.getElementById("zerqilo-booking-cart");
+  if (oldCart) oldCart.remove();
 
- 
+  if (zerqiloCart.length === 0) {
+    alert("Your cart is empty.");
+    return;
+  }
+
+  let total = 0;
+
+  zerqiloCart.forEach(item => {
+    total += Number(item.price) || 0;
+  });
+
+  const cartHTML = `
+    <div id="zerqilo-booking-cart" style="
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.55);
+      z-index:10000;
+      overflow-y:auto;
+      padding:25px 15px;
+    ">
+
+      <div style="
+        max-width:700px;
+        margin:auto;
+        background:white;
+        border-radius:18px;
+        padding:24px;
+        box-shadow:0 10px 40px rgba(0,0,0,0.25);
+      ">
+
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          margin-bottom:20px;
+        ">
+
+          <h2 style="margin:0;">
+            Your Cart
+          </h2>
+
+          <button
+            type="button"
+            onclick="document.getElementById('zerqilo-booking-cart').remove()"
+            style="
+              border:0;
+              background:#f3f3f3;
+              width:36px;
+              height:36px;
+              border-radius:50%;
+              font-size:20px;
+              cursor:pointer;
+            "
+          >
+            ×
+          </button>
+
+        </div>
+
+        ${zerqiloCart.map((item, index) => `
+
+          <div style="
+            border:1px solid #e5e5e5;
+            border-radius:14px;
+            padding:16px;
+            margin-bottom:12px;
+          ">
+
+            <div style="
+              display:flex;
+              justify-content:space-between;
+              gap:15px;
+            ">
+
+              <div style="flex:1;">
+
+                <div style="
+                  font-size:17px;
+                  font-weight:bold;
+                  margin-bottom:6px;
+                ">
+                  ${item.name}
+                </div>
+
+                <div style="
+                  color:#666;
+                  font-size:14px;
+                  line-height:1.5;
+                ">
+                  ${item.details || item.description || ""}
+                </div>
+
+                <div style="
+                  margin-top:8px;
+                  font-size:14px;
+                  color:#555;
+                ">
+                  Quantity: ${item.quantity}
+                </div>
+
+              </div>
+
+              <div style="
+                text-align:right;
+                white-space:nowrap;
+              ">
+
+                <div style="
+                  font-size:18px;
+                  font-weight:bold;
+                ">
+                  ₹${item.price}
+                </div>
+
+                <button
+                  type="button"
+                  onclick="removeFromCart(${index})"
+                  style="
+                    margin-top:10px;
+                    border:0;
+                    background:none;
+                    color:#d00;
+                    cursor:pointer;
+                    font-size:13px;
+                  "
+                >
+                  Remove
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        `).join("")}
+
+        <div style="
+          border-top:1px solid #ddd;
+          margin-top:20px;
+          padding-top:18px;
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          font-size:21px;
+          font-weight:bold;
+        ">
+
+          <span>Total</span>
+
+          <span>
+            ₹${total}
+          </span>
+
+        </div>
+
+        <button
+          type="button"
+          onclick="proceedToBooking()"
+          style="
+            width:100%;
+            margin-top:20px;
+            padding:15px;
+            border:0;
+            border-radius:10px;
+            background:#111;
+            color:white;
+            font-size:16px;
+            font-weight:bold;
+            cursor:pointer;
+          "
+        >
+          Continue to Booking
+        </button>
+
+      </div>
+
+    </div>
+  `;
+
+  document.body.insertAdjacentHTML("beforeend", cartHTML);
 }
 
-function proceedToPayment() {
-  alert("Booking details and payment step will be connected next.");
+
+function removeFromCart(index) {
+
+  zerqiloCart.splice(index, 1);
+
+  if (zerqiloCart.length === 0) {
+
+    const cart = document.getElementById("zerqilo-booking-cart");
+
+    if (cart) cart.remove();
+
+    alert("Your cart is empty.");
+    return;
+  }
+
+  showBookingCart();
+}
+
+
+function proceedToBooking() {
+
+  alert("Next step: Date, Time and Address.");
+
 }
 </script>
 
