@@ -567,6 +567,7 @@ loadZerqiloServices();
   document.getElementById("services").scrollIntoView({
     behavior: "smooth"
   });
+ }
 async function startBooking(serviceId) {
 
   const { data, error } = await supabaseClient
@@ -893,8 +894,9 @@ details:
 
       alert("Service added to cart.");
     });
+});
 }
-   
+  
    let zerqiloCart = [];
 
 
