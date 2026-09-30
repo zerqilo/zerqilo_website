@@ -570,44 +570,6 @@ loadZerqiloServices();
 }let zerqiloCart = [];
 
 
-    alert("Please select at least one service.");
-    return;
-  }
-
-  let total = zerqiloCart.reduce((sum, service) => {
-    return sum + (Number(service.price) || 0);
-  }, 0);
-
-  const cartHTML = `
-    <div id="zerqilo-booking-cart" style="padding:20px;">
-      <h2>Selected Services</h2>
-
-      ${zerqiloCart.map((service, index) => `
-        <div style="margin-bottom:15px;">
-          <strong>${service.name}</strong>
-          <span> ₹${service.price || 0}</span>
-          <button type="button" onclick="removeFromCart(${index})">
-            Remove
-          </button>
-        </div>
-      `).join("")}
-
-      <hr>
-
-      <h3>Total: ₹${total}</h3>
-
-      <button type="button" onclick="proceedToPayment()">
-        Proceed to Payment
-      </button>
-    </div>
-  `;
-
-  document.body.insertAdjacentHTML("beforeend", cartHTML);
-
-  document.getElementById("zerqilo-booking-cart")
-    .scrollIntoView({ behavior: "smooth" });
-}
-
  
 function removeFromCart(index) {
   zerqiloCart.splice(index, 1);
@@ -615,7 +577,7 @@ function removeFromCart(index) {
   const cart = document.getElementById("zerqilo-booking-cart");
   if (cart) cart.remove();
 
-  showBookingCart();
+ 
 }
 
 function proceedToPayment() {
