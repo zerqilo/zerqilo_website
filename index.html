@@ -851,7 +851,7 @@ async function startBooking(serviceId) {
 
   document
     .getElementById("zerqilo-add-selected")
-    .addEventListener("click", () => {
+    .addEventListener("click", async () => {
 
       const selected = [];
 
@@ -1287,8 +1287,85 @@ function proceedToBooking() {
         alert("Please enter your service address.");
         return;
       }
+const totalAmount = zerqiloCart.reduce(
+        (sum, item) => sum + Number(item.price || 0),
+        0
+      );
 
-     
+      const { data: { user } } = await supabaseClient.auth.getUser();
+
+      if (!user) {
+        alert("Please login before booking.");
+        return;
+      }
+
+      const { data: customer, error: customerError } =
+        await supabaseClient
+          .from("customers")
+          .select("id")
+          .eq("auth_user_id", user.id)
+          .single();
+
+      if (customerError || !customer) {
+        console.error(customerError);
+        alert("Customer profile not found.");
+        return;
+      }
+
+      const firstServiceId = zerqiloCart[0]?.id;
+
+      const { data: booking, error: bookingError } =
+        await supabaseClient
+          .from("bookings")
+          .insert({
+            customer_id: customer.id,
+            service_id: firstServiceId,
+            booking_date: date,
+            booking_time: time,
+            address: address,
+            total_amount: totalAmount,
+            status: "pending"
+          })
+          .select()
+          .single();
+
+      if (bookingError) {
+        console.error("Booking creation error:", bookingError);
+        alert("Booking could not be created.");
+        return;
+      }
+
+      console.log("ZERQILO booking created:", booking);
+    const bookingItems = zerqiloCart.map(item => ({
+        booking_id: booking.id,
+        service_id: item.id,
+        item_name: item.name,
+        variant: item.variant || "",
+        quantity: Number(item.quantity || 1),
+        unit_price: Number(item.unitPrice || item.price || 0),
+        line_total: Number(item.price || 0),
+        details: item.details || ""
+      }));
+
+      const { error: itemsError } =
+        await supabaseClient
+          .from("booking_items")
+          .insert(bookingItems);
+
+      if (itemsError) {
+        console.error("Booking items error:", itemsError);
+        alert("Booking created, but booking items could not be saved.");
+        return;
+      }
+
+      console.log("ZERQILO booking items saved:", bookingItems); 
+alert(
+  "Booking Confirmed Successfully!\n\n" +
+  "Your ZERQILO booking has been created."
+);
+
+box.remove();
+zerqiloCart = [];
     });
 
 }
