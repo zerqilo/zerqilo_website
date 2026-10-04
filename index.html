@@ -306,7 +306,7 @@ footer{background:#052e4d;color:#d9e7f1;padding:30px 0}
       <a href="#why">Why ZERQILO</a>
       <a href="#booking">Book Now</a>
       <a href="#contact">Contact</a>
-
+<a href="#" onclick="zerqiloShowMyBookings(); return false;">My Bookings</a>
       <a href="#" class="pill login" onclick="zerqiloShowAuth('login');return false;">Login</a>
       <a href="#" class="pill create" onclick="zerqiloShowAuth('signup');return false;">Create Account</a>
       <a href="tel:+919503140757" class="pill call">☎ Call Now</a>
@@ -1368,7 +1368,71 @@ zerqiloCart = [];
     });
 
 }
+  
+function zerqiloShowMyBookings() {
+  const bookingsBox = document.getElementById("zerqilo-my-bookings");
+
+  if (!bookingsBox) {
+    console.error("ZERQILO My Bookings section not found.");
+    return;
+  }
+
+  bookingsBox.style.display = "block";
+
+  window.scrollTo({
+    top: bookingsBox.offsetTop,
+    behavior: "smooth"
+  });
+}  
 </script>
+
+
+
+
+<!-- ZERQILO MY BOOKINGS -->
+<section id="zerqilo-my-bookings" style="display:none; padding:40px 20px; max-width:1100px; margin:auto;">
+
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:25px;">
+    <div>
+      <h2 style="margin:0;">My Bookings</h2>
+      <p style="margin:6px 0 0; color:#666;">
+        View and manage your ZERQILO bookings
+      </p>
+    </div>
+
+    <button
+      id="zerqilo-close-bookings"
+      type="button"
+      style="padding:10px 18px; border:1px solid #ddd; border-radius:8px; background:#fff; cursor:pointer;">
+      Close
+    </button>
+  </div>
+
+  <div style="display:flex; gap:10px; margin-bottom:25px; flex-wrap:wrap;">
+    <button type="button" class="zerqilo-booking-tab active" data-status="all">
+      All
+    </button>
+
+    <button type="button" class="zerqilo-booking-tab" data-status="pending">
+      Upcoming
+    </button>
+
+    <button type="button" class="zerqilo-booking-tab" data-status="completed">
+      Completed
+    </button>
+
+    <button type="button" class="zerqilo-booking-tab" data-status="cancelled">
+      Cancelled
+    </button>
+  </div>
+
+  <div id="zerqilo-bookings-list">
+    <p style="color:#666;">Loading your bookings...</p>
+  </div>
+
+</section>
+<!-- END ZERQILO MY BOOKINGS -->
+
 
 </body>
 </html>
