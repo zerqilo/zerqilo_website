@@ -1426,7 +1426,19 @@ async function zerqiloShowMyBookings() {
   }
 
   console.log("ZERQILO My Bookings:", bookings);
+const bookingIds = bookings.map(booking => booking.id);
 
+const { data: bookingItems, error: bookingItemsError } =
+  await supabaseClient
+    .from("booking_items")
+    .select("*")
+    .in("booking_id", bookingIds);
+
+if (bookingItemsError) {
+  console.error("Booking items fetch error:", bookingItemsError);
+}
+
+console.log("ZERQILO My Booking Items:", bookingItems);
   if (!bookings || bookings.length === 0) {
     list.innerHTML = "<p style='color:#666;'>You have no bookings yet.</p>";
     return;
