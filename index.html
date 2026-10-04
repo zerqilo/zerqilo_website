@@ -1368,8 +1368,7 @@ zerqiloCart = [];
     });
 
 }
-  
-function zerqiloShowMyBookings() {
+async function zerqiloShowMyBookings() {
   const bookingsBox = document.getElementById("zerqilo-my-bookings");
 
   if (!bookingsBox) {
@@ -1383,6 +1382,87 @@ function zerqiloShowMyBookings() {
     top: bookingsBox.offsetTop,
     behavior: "smooth"
   });
+
+  const list = document.getElementById("zerqilo-bookings-list");
+
+  if (!list) {
+    console.error("ZERQILO bookings list not found.");
+    return;
+  }
+
+  list.innerHTML = "<p style='color:#666;'>Loading your bookings...</p>";
+
+  const { data: { user } } = await supabaseClient.auth.getUser();
+
+  if (!user) {
+    list.innerHTML = "<p>Please login to view your bookings.</p>";
+    return;
+  }
+
+  const { data: customer, error: customerError } =
+    await supabaseClient
+      .from("customers")
+      .select("id")
+      .eq("auth_user_id", user.id)
+      .single();
+
+  if (customerError || !customer) {
+    console.error("Customer fetch error:", customerError);
+    list.innerHTML = "<p>Customer profile not found.</p>";
+    return;
+  }
+
+  const { data: bookings, error: bookingsError } =
+    await supabaseClient
+      .from("bookings")
+      .select("*")
+      .eq("customer_id", customer.id)
+      .order("created_at", { ascending: false });
+
+  if (bookingsError) {
+    console.error("Bookings fetch error:", bookingsError);
+    list.innerHTML = "<p>Unable to load your bookings.</p>";
+    return;
+  }
+
+  console.log("ZERQILO My Bookings:", bookings);
+
+  if (!bookings || bookings.length === 0) {
+    list.innerHTML = "<p style='color:#666;'>You have no bookings yet.</p>";
+    return;
+  }
+
+  list.innerHTML = bookings.map(booking => `
+    <div style="
+      border:1px solid #e5e5e5;
+      border-radius:12px;
+      padding:18px;
+      margin-bottom:15px;
+      background:#fff;
+    ">
+      <strong>Booking #${booking.id}</strong>
+
+      <div style="margin-top:10px;">
+        Date: ${booking.booking_date || "-"}
+      </div>
+
+      <div>
+        Time: ${booking.booking_time || "-"}
+      </div>
+
+      <div>
+        Address: ${booking.address || "-"}
+      </div>
+
+      <div>
+        Amount: ₹${booking.total_amount || 0}
+      </div>
+
+      <div>
+        Status: ${booking.status || "-"}
+      </div>
+    </div>
+  `).join("");
 }  
 </script>
 
