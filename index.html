@@ -1446,22 +1446,16 @@ console.log("ZERQILO My Booking Items:", bookingItems);
   }
 
   
-    list.innerHTML = bookings.map(booking => `
-    <div 
-data-booking-status="${booking.status || ""}"
-style="
-      border:1px solid #e5e5e5;
-      border-radius:12px;
-      padding:18px;
-      margin-bottom:15px;
-      background:#fff;
-    
-      border:1px solid #e5e5e5;
-      border-radius:12px;
-      padding:18px;
-      margin-bottom:15px;
-      background:#fff;
-    ">
+list.innerHTML = bookings.map(booking => `
+    <div
+      data-booking-status="${booking.status || ""}"
+      style="
+        border:1px solid #e5e5e5;
+        border-radius:12px;
+        padding:18px;
+        margin-bottom:15px;
+        background:#fff;
+      ">
       <strong>Booking #${booking.id}</strong>
 
       <div style="margin-top:10px;">
