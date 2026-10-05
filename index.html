@@ -1457,7 +1457,45 @@ list.innerHTML = bookings.map(booking => `
         background:#fff;
       ">
       <strong>Booking #${booking.id}</strong>
+      ${
+        (bookingItems || [])
+          .filter(item => item.booking_id === booking.id)
+          .map(item => `
+            <div style="
+              margin-top:15px;
+              padding:14px;
+              background:#f8fafc;
+              border-radius:10px;
+            ">
+              <strong>Service Details</strong>
 
+              <div style="margin-top:8px;">
+                Service: ${item.item_name || "-"}
+              </div>
+
+              <div>
+                Variant: ${item.variant || "-"}
+              </div>
+
+              <div>
+                Quantity: ${item.quantity || 0}
+              </div>
+
+              <div>
+                Unit Price: ₹${item.unit_price || 0}
+              </div>
+
+              <div>
+                Line Total: ₹${item.line_total || 0}
+              </div>
+
+              <div>
+                Details: ${item.details || "-"}
+              </div>
+            </div>
+          `)
+          .join("")
+      }
       <div style="margin-top:10px;">
         Date: ${booking.booking_date || "-"}
       </div>
