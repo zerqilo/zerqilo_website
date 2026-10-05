@@ -1476,8 +1476,46 @@ console.log("ZERQILO My Booking Items:", bookingItems);
       </div>
     </div>
   `).join("");
-}
   
+}
+// ZERQILO MY BOOKINGS FILTER
+document.addEventListener("click", (event) => {
+  const tab = event.target.closest(".zerqilo-booking-tab");
+
+  if (!tab) return;
+
+  const status = tab.dataset.status;
+
+  const bookingsBox = document.getElementById("zerqilo-my-bookings");
+
+  if (!bookingsBox) return;
+
+  const bookingCards = document.querySelectorAll(
+    "#zerqilo-bookings-list > div"
+  );
+
+  document
+    .querySelectorAll(".zerqilo-booking-tab")
+    .forEach(button => {
+      button.classList.remove("active");
+    });
+
+  tab.classList.add("active");
+
+  bookingCards.forEach(card => {
+    const statusText = card.textContent
+      .toLowerCase()
+      .replace(/\s+/g, " ");
+
+    if (status === "all") {
+      card.style.display = "block";
+    } else if (statusText.includes(`status: ${status}`)) {
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+    }
+  });
+});  
  
 </script>
 
