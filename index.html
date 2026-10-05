@@ -1445,8 +1445,17 @@ console.log("ZERQILO My Booking Items:", bookingItems);
     return;
   }
 
-  list.innerHTML = bookings.map(booking => `
-    <div style="
+  
+    list.innerHTML = bookings.map(booking => `
+    <div 
+data-booking-status="${booking.status || ""}"
+style="
+      border:1px solid #e5e5e5;
+      border-radius:12px;
+      padding:18px;
+      margin-bottom:15px;
+      background:#fff;
+    
       border:1px solid #e5e5e5;
       border-radius:12px;
       padding:18px;
@@ -1478,45 +1487,7 @@ console.log("ZERQILO My Booking Items:", bookingItems);
   `).join("");
   
 }
-// ZERQILO MY BOOKINGS FILTER
-document.addEventListener("click", (event) => {
-  const tab = event.target.closest(".zerqilo-booking-tab");
 
-  if (!tab) return;
-
-  const status = tab.dataset.status;
-
-  const bookingsBox = document.getElementById("zerqilo-my-bookings");
-
-  if (!bookingsBox) return;
-
-  const bookingCards = document.querySelectorAll(
-    "#zerqilo-bookings-list > div"
-  );
-
-  document
-    .querySelectorAll(".zerqilo-booking-tab")
-    .forEach(button => {
-      button.classList.remove("active");
-    });
-
-  tab.classList.add("active");
-
-  bookingCards.forEach(card => {
-    const statusText = card.textContent
-      .toLowerCase()
-      .replace(/\s+/g, " ");
-
-    if (status === "all") {
-      card.style.display = "block";
-    } else if (statusText.includes(`status: ${status}`)) {
-      card.style.display = "block";
-    } else {
-      card.style.display = "none";
-    }
-  });
-});  
- 
 </script>
 
 
