@@ -1622,6 +1622,212 @@ list.innerHTML = bookings.map(booking => {
 
 }
 
+async function zerqiloViewBookingDetails(bookingId) {
+
+  const oldBox = document.getElementById("zerqilo-booking-details-view");
+
+  if (oldBox) {
+    oldBox.remove();
+  }
+
+  const { data: booking, error: bookingError } =
+    await supabaseClient
+      .from("bookings")
+      .select("*")
+      .eq("id", bookingId)
+      .single();
+
+  if (bookingError || !booking) {
+    console.error("Booking details error:", bookingError);
+    alert("Booking details could not be loaded.");
+    return;
+  }
+
+  const { data: items, error: itemsError } =
+    await supabaseClient
+      .from("booking_items")
+      .select("*")
+      .eq("booking_id", bookingId);
+
+  if (itemsError) {
+    console.error("Booking items error:", itemsError);
+  }
+
+  const servicesHTML = (items || []).map(item => {
+
+    const optionName =
+      item.details?.split(" - ")[0] ||
+      item.variant ||
+      item.item_name ||
+      "Service";
+
+    return `
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        padding:10px 0;
+        border-bottom:1px solid #e5e7eb;
+      ">
+        <div>
+          <strong>${item.item_name || "Service"}</strong>
+          <div style="margin-top:4px;color:#666;">
+            ${optionName}
+          </div>
+        </div>
+
+        <strong>
+          ×${item.quantity || 0}
+        </strong>
+      </div>
+    `;
+
+  }).join("");
+
+  const box = document.createElement("div");
+
+  box.id = "zerqilo-booking-details-view";
+
+  box.style.cssText = `
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.55);
+    z-index:12000;
+    overflow-y:auto;
+    padding:25px 15px;
+  `;
+
+  box.innerHTML = `
+    <div style="
+      max-width:650px;
+      margin:auto;
+      background:#fff;
+      border-radius:18px;
+      padding:24px;
+      box-shadow:0 10px 40px rgba(0,0,0,0.25);
+    ">
+
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+      ">
+        <h2 style="margin:0;">
+          Booking Details
+        </h2>
+
+        <button
+          type="button"
+          id="zerqilo-close-booking-details"
+          style="
+            border:0;
+            background:transparent;
+            font-size:24px;
+            cursor:pointer;
+          "
+        >
+          ×
+        </button>
+      </div>
+
+      <div style="
+        margin-top:20px;
+        padding:15px;
+        background:#f8fafc;
+        border-radius:10px;
+      ">
+
+        <div>
+          <strong>Booking ID:</strong>
+          #${booking.id}
+        </div>
+
+        <div style="margin-top:10px;">
+          <strong>Date:</strong>
+          ${booking.booking_date || "-"}
+        </div>
+
+        <div style="margin-top:10px;">
+          <strong>Time:</strong>
+          ${booking.booking_time || "-"}
+        </div>
+
+        <div style="margin-top:10px;">
+          <strong>Address:</strong>
+          ${booking.address || "-"}
+        </div>
+
+      </div>
+
+      <h3 style="margin-top:24px;">
+        Services
+      </h3>
+
+      <div>
+        ${
+          servicesHTML ||
+          `<div style="color:#666;">
+            No service details found.
+          </div>`
+        }
+      </div>
+
+      <div style="
+        margin-top:22px;
+        padding-top:15px;
+        border-top:1px solid #e5e5e5;
+        font-size:20px;
+      ">
+        <strong>Total:</strong>
+        ₹${booking.total_amount || 0}
+      </div>
+
+      <div style="
+        margin-top:12px;
+        padding:10px 14px;
+        background:#f1f5f9;
+        border-radius:8px;
+      ">
+        <strong>Status:</strong>
+        ${booking.status || "-"}
+      </div>
+
+      <button
+        type="button"
+        id="zerqilo-close-booking-details-bottom"
+        style="
+          width:100%;
+          margin-top:22px;
+          padding:13px;
+          border:0;
+          border-radius:10px;
+          background:#111827;
+          color:#fff;
+          font-size:16px;
+          font-weight:600;
+          cursor:pointer;
+        "
+      >
+        Close
+      </button>
+
+    </div>
+  `;
+
+  document.body.appendChild(box);
+
+  document
+    .getElementById("zerqilo-close-booking-details")
+    .addEventListener("click", () => {
+      box.remove();
+    });
+
+  document
+    .getElementById("zerqilo-close-booking-details-bottom")
+    .addEventListener("click", () => {
+      box.remove();
+    });
+
+}
 </script>
 
 
