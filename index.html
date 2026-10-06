@@ -1450,7 +1450,12 @@ console.log("ZERQILO My Booking Items:", bookingItems);
   }
 
   
-list.innerHTML = bookings.map(booking => `
+list.innerHTML = bookings.map(booking => {
+  const itemsForBooking = (bookingItems || []).filter(
+  item => Number(item.booking_id) === Number(booking.id)
+);
+
+return `
     <div
       data-booking-status="${booking.status || ""}"
       style="
@@ -1464,45 +1469,44 @@ list.innerHTML = bookings.map(booking => `
       <div style="margin-top:12px;">
   <strong>Services:</strong>
 </div>
-      ${
-        (bookingItems || [])
-          .filter(item => item.booking_id === booking.id)
-          .map(item => `
-            <div style="
-              margin-top:15px;
-              padding:14px;
-              background:#f8fafc;
-              border-radius:10px;
-            ">
-              <strong>Service Details</strong>
+     ${
+  itemsForBooking.length
+    ? itemsForBooking.map(item => `
+        <div style="
+          margin-top:15px;
+          padding:14px;
+          background:#f8fafc;
+          border-radius:10px;
+        ">
+          <strong>Service Details</strong>
 
-              <div style="margin-top:8px;">
-                Service: ${item.item_name || "-"}
-              </div>
+          <div style="margin-top:8px;">
+            Service: ${item.item_name || "-"}
+          </div>
 
-              <div>
-                Variant: ${item.variant || "-"}
-              </div>
+          <div>
+            Variant: ${item.variant || "-"}
+          </div>
 
-              <div>
-                Quantity: ${item.quantity || 0}
-              </div>
+          <div>
+            Quantity: ${item.quantity || 0}
+          </div>
 
-              <div>
-                Unit Price: ₹${item.unit_price || 0}
-              </div>
+          <div>
+            Unit Price: ₹${item.unit_price || 0}
+          </div>
 
-              <div>
-                Line Total: ₹${item.line_total || 0}
-              </div>
+          <div>
+            Line Total: ₹${item.line_total || 0}
+          </div>
 
-              <div>
-                Details: ${item.details || "-"}
-              </div>
-            </div>
-          `)
-          .join("")
-      }
+          <div>
+            Details: ${item.details || "-"}
+          </div>
+        </div>
+      `).join("")
+    : `<div style="margin-top:8px; color:#666;">No service details found.</div>`
+}
       <div style="margin-top:10px;">
         Date: ${booking.booking_date || "-"}
       </div>
