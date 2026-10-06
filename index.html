@@ -1451,11 +1451,78 @@ console.log("ZERQILO My Booking Items:", bookingItems);
 
   
 list.innerHTML = bookings.map(booking => {
-  const itemsForBooking = (bookingItems || []).filter(
-  item => Number(item.booking_id) === Number(booking.id)
-);
 
-return `
+  const itemsForBooking = (bookingItems || []).filter(
+    item => Number(item.booking_id) === Number(booking.id)
+  );
+
+  const groupedServices = {};
+
+  itemsForBooking.forEach(item => {
+
+    const serviceName = item.item_name || "Service";
+
+    if (!groupedServices[serviceName]) {
+      groupedServices[serviceName] = [];
+    }
+
+    groupedServices[serviceName].push(item);
+  });
+
+  const servicesHTML = Object.entries(groupedServices)
+    .map(([serviceName, items]) => {
+
+      return `
+        <div style="
+          margin-top:18px;
+          padding:14px;
+          background:#f8fafc;
+          border-radius:10px;
+        ">
+
+          <strong>${serviceName}</strong>
+
+          <div style="margin-top:10px;">
+
+            ${items.map(item => {
+
+              const serviceDetails = item.details || "";
+
+              const optionName =
+                serviceDetails.split(" - ")[0] ||
+                item.variant ||
+                serviceName;
+
+              return `
+                <div style="
+                  display:flex;
+                  justify-content:space-between;
+                  align-items:center;
+                  padding:7px 0;
+                  border-bottom:1px solid #e5e7eb;
+                ">
+
+                  <span>
+                    ${optionName}
+                  </span>
+
+                  <strong>
+                    ${item.quantity || 0}
+                  </strong>
+
+                </div>
+              `;
+
+            }).join("")}
+
+          </div>
+
+        </div>
+      `;
+
+    }).join("");
+
+  return `
     <div
       data-booking-status="${booking.status || ""}"
       style="
@@ -1464,72 +1531,56 @@ return `
         padding:18px;
         margin-bottom:15px;
         background:#fff;
-      ">
+      "
+    >
+
       <strong>Booking #${booking.id}</strong>
-      <div style="margin-top:12px;">
-  <strong>Services:</strong>
-</div>
-     ${
-  itemsForBooking.length
-    ? itemsForBooking.map(item => `
-        <div style="
-          margin-top:15px;
-          padding:14px;
-          background:#f8fafc;
-          border-radius:10px;
-        ">
-          <strong>Service Details</strong>
 
-          <div style="margin-top:8px;">
-            Service: ${item.item_name || "-"}
-          </div>
-
-          <div>
-            Variant: ${item.variant || "-"}
-          </div>
-
-          <div>
-            Quantity: ${item.quantity || 0}
-          </div>
-
-          <div>
-            Unit Price: ₹${item.unit_price || 0}
-          </div>
-
-          <div>
-            Line Total: ₹${item.line_total || 0}
-          </div>
-
-          <div>
-            Details: ${item.details || "-"}
-          </div>
-        </div>
-      `).join("")
-    : `<div style="margin-top:8px; color:#666;">No service details found.</div>`  
-     }
-      <div style="margin-top:10px;">
-        Date: ${booking.booking_date || "-"}
+      <div style="margin-top:14px;">
+        <strong>Date:</strong>
+        ${booking.booking_date || "-"}
       </div>
 
-      <div>
-        Time: ${booking.booking_time || "-"}
+      <div style="margin-top:6px;">
+        <strong>Time:</strong>
+        ${booking.booking_time || "-"}
       </div>
 
-      <div>
-        Address: ${booking.address || "-"}
+      <div style="margin-top:6px;">
+        <strong>Address:</strong>
+        ${booking.address || "-"}
       </div>
 
-      <div>
-        Amount: ₹${booking.total_amount || 0}
+      <div style="margin-top:18px;">
+        <strong>Services</strong>
       </div>
 
-      <div>
-        Status: ${booking.status || "-"}
+      ${
+        servicesHTML ||
+        `<div style="margin-top:8px; color:#666;">
+          No service details found.
+        </div>`
+      }
+
+      <div style="
+        margin-top:20px;
+        padding-top:15px;
+        border-top:1px solid #e5e5e5;
+        font-size:18px;
+      ">
+        <strong>Total:</strong>
+        ₹${booking.total_amount || 0}
       </div>
+
+      <div style="margin-top:8px;">
+        <strong>Status:</strong>
+        ${booking.status || "-"}
+      </div>
+
     </div>
   `;
+
 }).join("");
-  
 }
 
 </script>
