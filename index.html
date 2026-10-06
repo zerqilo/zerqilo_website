@@ -1461,6 +1461,9 @@ list.innerHTML = bookings.map(booking => `
         background:#fff;
       ">
       <strong>Booking #${booking.id}</strong>
+      <div style="margin-top:12px;">
+  <strong>Services:</strong>
+</div>
       ${
         (bookingItems || [])
           .filter(item => item.booking_id === booking.id)
