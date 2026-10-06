@@ -1337,7 +1337,17 @@ const totalAmount = zerqiloCart.reduce(
       }
 
       console.log("ZERQILO booking created:", booking);
-    const bookingItems = zerqiloCart.map(item => ({
+         const { error: historyError } = await supabaseClient
+        .from("booking_status_history")
+        .insert({
+          booking_id: booking.id,
+          status: "pending"
+        });
+
+      if (historyError) {
+        console.error("Booking status history error:", historyError);
+      }
+      const bookingItems = zerqiloCart.map(item => ({
         booking_id: booking.id,
         service_id: item.id,
         item_name: item.name,
