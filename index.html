@@ -1791,7 +1791,24 @@ async function zerqiloViewBookingDetails(bookingId) {
         ${booking.status || "-"}
       </div>
 
-      <button
+    <button
+  type="button"
+  onclick="zerqiloCancelBooking('${booking.id}')"
+  style="
+    width:100%;
+    margin-top:12px;
+    padding:13px;
+    border:0;
+    border-radius:10px;
+    background:#dc2626;
+    color:#fff;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+  "
+>
+  Cancel Booking
+</button>  <button
         type="button"
         id="zerqilo-close-booking-details-bottom"
         style="
