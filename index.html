@@ -1826,8 +1826,42 @@ async function zerqiloViewBookingDetails(bookingId) {
     .addEventListener("click", () => {
       box.remove();
     });
-
 }
+ async function zerqiloCancelBooking(bookingId) {
+
+  const confirmed = confirm(
+    "Are you sure you want to cancel this booking?"
+  );
+
+  if (!confirmed) {
+    return;
+  }
+
+  const { error } = await supabaseClient
+    .from("bookings")
+    .update({
+      status: "cancelled"
+    })
+    .eq("id", bookingId);
+
+  if (error) {
+    console.error("Booking cancellation error:", error);
+    alert("Booking could not be cancelled.");
+    return;
+  }
+
+  alert("Booking cancelled successfully.");
+
+  const detailsBox =
+    document.getElementById("zerqilo-booking-details-view");
+
+  if (detailsBox) {
+    detailsBox.remove();
+  }
+
+  await zerqiloShowMyBookings();
+} 
+
 </script>
 
 
