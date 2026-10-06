@@ -1581,6 +1581,26 @@ list.innerHTML = bookings.map(booking => {
   `;
 
 }).join("");
+    document.querySelectorAll(".zerqilo-booking-tab").forEach(tab => {
+    tab.onclick = () => {
+      const selectedStatus = tab.dataset.status;
+
+      document.querySelectorAll(".zerqilo-booking-tab").forEach(button => {
+        button.classList.remove("active");
+      });
+
+      tab.classList.add("active");
+
+      document.querySelectorAll("#zerqilo-bookings-list > div").forEach(card => {
+        const bookingStatus = card.dataset.bookingStatus;
+
+        card.style.display =
+          selectedStatus === "all" || bookingStatus === selectedStatus
+            ? ""
+            : "none";
+      });
+    };
+  });
 }
 
 </script>
