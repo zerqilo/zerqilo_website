@@ -1581,7 +1581,7 @@ list.innerHTML = bookings.map(booking => {
   `;
 
 }).join("");
-    document.querySelectorAll(".zerqilo-booking-tab").forEach(tab => {
+  document.querySelectorAll(".zerqilo-booking-tab").forEach(tab => {
     tab.onclick = () => {
       const selectedStatus = tab.dataset.status;
 
@@ -1600,7 +1600,8 @@ list.innerHTML = bookings.map(booking => {
             : "none";
       });
     };
-  });
+  });  
+
 }
 
 </script>
