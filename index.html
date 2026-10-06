@@ -1575,6 +1575,24 @@ list.innerHTML = bookings.map(booking => {
       <div style="margin-top:8px;">
         <strong>Status:</strong>
         ${booking.status || "-"}
+        <div style="margin-top:12px;">
+  <button
+    type="button"
+    onclick="zerqiloViewBookingDetails('${booking.id}')"
+    style="
+      width:100%;
+      padding:10px 14px;
+      border:none;
+      border-radius:8px;
+      background:#111827;
+      color:#fff;
+      font-weight:600;
+      cursor:pointer;
+    "
+  >
+    View Details
+  </button>
+</div>
       </div>
 
     </div>
