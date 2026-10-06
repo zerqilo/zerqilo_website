@@ -1440,6 +1440,10 @@ if (bookingItemsError) {
 }
 
 console.log("ZERQILO My Booking Items:", bookingItems);
+ console.log(
+  "ZERQILO Booking 34 Items:",
+  (bookingItems || []).filter(item => Number(item.booking_id) === 34)
+); 
   if (!bookings || bookings.length === 0) {
     list.innerHTML = "<p style='color:#666;'>You have no bookings yet.</p>";
     return;
