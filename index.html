@@ -1463,13 +1463,13 @@ const totalAmount = zerqiloCart.reduce(
 
       console.log("ZERQILO booking items saved:", bookingItems); 
       const { error: paymentError } = await supabaseClient
-  .from("payments")
+  .from("payemnts")
   .insert({
     booking_id: booking.id,
     customer_id: customer.id,
     amount: totalAmount,
-    payment_method: paymentMethod,
-    payment_status: "pending"
+    payement_method: paymentMethod,
+    payement_status: "pending"
   });
 
 if (paymentError) {
