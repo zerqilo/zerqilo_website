@@ -1818,7 +1818,26 @@ async function zerqiloViewBookingDetails(bookingId) {
   "
 >
   Cancel Booking
-</button>  <button
+</button>
+      <button
+        type="button"
+        id="zerqilo-pay-now-button"
+        onclick="zerqiloPayNow('${booking.id}')"
+        style="
+          width:100%;
+          margin-top:12px;
+          padding:13px;
+          border:0;
+          border-radius:10px;
+          background:#16a34a;
+          color:#fff;
+          font-size:16px;
+          font-weight:600;
+          cursor:pointer;
+        "
+      >
+        Pay Now
+      </button>
         type="button"
         id="zerqilo-close-booking-details-bottom"
         style="
