@@ -1214,6 +1214,88 @@ function proceedToBooking() {
           resize:vertical;
         "
       ></textarea>
+     </textarea>
+
+      <div style="
+        margin-top:6px;
+        margin-bottom:20px;
+        padding:16px;
+        border:1px solid #e5e7eb;
+        border-radius:12px;
+        background:#f8fafc;
+      ">
+
+        <div style="
+          font-size:17px;
+          font-weight:bold;
+          margin-bottom:14px;
+        ">
+          Payment Method
+        </div>
+
+        <label style="
+          display:flex;
+          align-items:flex-start;
+          gap:10px;
+          padding:12px;
+          border:1px solid #111;
+          border-radius:10px;
+          background:white;
+          cursor:pointer;
+        ">
+          <input
+            type="radio"
+            name="zerqilo-payment-method"
+            value="pay_now"
+            checked
+            style="margin-top:4px;"
+          >
+
+          <span>
+            <strong>Pay Now</strong>
+            <span style="
+              display:block;
+              margin-top:4px;
+              color:#666;
+              font-size:14px;
+            ">
+              Pay securely online
+            </span>
+          </span>
+        </label>
+
+        <label style="
+          display:flex;
+          align-items:flex-start;
+          gap:10px;
+          margin-top:10px;
+          padding:12px;
+          border:1px solid #ddd;
+          border-radius:10px;
+          background:white;
+          cursor:pointer;
+        ">
+          <input
+            type="radio"
+            name="zerqilo-payment-method"
+            value="pay_after_service"
+            style="margin-top:4px;"
+          >
+
+          <span>
+            <strong>Pay After Service</strong>
+            <span style="
+              display:block;
+              margin-top:4px;
+              color:#666;
+              font-size:14px;
+            ">
+              Pay after your service is completed
+            </span>
+          </span>
+        </label>
+
+      </div> 
 
       <button
         type="button"
