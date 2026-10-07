@@ -1370,6 +1370,16 @@ function proceedToBooking() {
         alert("Please enter your service address.");
         return;
       }
+      
+            const paymentMethod =
+        document.querySelector(
+          'input[name="zerqilo-payment-method"]:checked'
+        )?.value;
+
+      if (!paymentMethod) {
+        alert("Please select a payment method.");
+        return;
+      }
 const totalAmount = zerqiloCart.reduce(
         (sum, item) => sum + Number(item.price || 0),
         0
