@@ -1462,6 +1462,21 @@ const totalAmount = zerqiloCart.reduce(
       }
 
       console.log("ZERQILO booking items saved:", bookingItems); 
+      const { error: paymentError } = await supabaseClient
+  .from("payments")
+  .insert({
+    booking_id: booking.id,
+    customer_id: customer.id,
+    amount: totalAmount,
+    payment_method: paymentMethod,
+    payment_status: "pending"
+  });
+
+if (paymentError) {
+  console.error("Payment record error:", paymentError);
+  alert("Booking created, but payment record could not be saved.");
+  return;
+}
 alert(
   "Booking Confirmed Successfully!\n\nYour ZERQILO booking has been created."
 );
