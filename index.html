@@ -1877,7 +1877,17 @@ async function zerqiloViewBookingDetails(bookingId) {
     return;
   }
 
-  alert("Booking cancelled successfully.");
+   const { error: historyError } = await supabaseClient
+    .from("booking_status_history")
+    .insert({
+      booking_id: bookingId,
+      status: "cancelled"
+    });
+
+  if (historyError) {
+    console.error("Booking cancellation history error:", historyError);
+  }
+   alert("Booking cancelled successfully.");
 
   const detailsBox =
     document.getElementById("zerqilo-booking-details-view");
