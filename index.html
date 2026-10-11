@@ -1909,30 +1909,61 @@ async function zerqiloViewBookingDetails(bookingId) {
       </div>
 
  ```html
-      <button
-        type="button"
-        onclick="zerqiloCancelBooking('${booking.id}')"
-        style="width:100%;margin-top:12px;padding:13px;border:0;border-radius:10px;background:#dc2626;color:#fff;font-size:16px;font-weight:600;cursor:pointer;"
-      >
-        Cancel Booking
-      </button>
-
+    <button
+  type="button"
+  onclick="zerqiloCancelBooking('${booking.id}')"
+  style="
+    width:100%;
+    margin-top:12px;
+    padding:13px;
+    border:0;
+    border-radius:10px;
+    background:#dc2626;
+    color:#fff;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+  "
+>
+  Cancel Booking
+</button>
       <button
         type="button"
         id="zerqilo-pay-now-button"
         onclick="zerqiloPayNow('${booking.id}')"
-        style="width:100%;margin-top:12px;padding:13px;border:0;border-radius:10px;background:#16a34a;color:#fff;font-size:16px;font-weight:600;cursor:pointer;"
+        style="
+          width:100%;
+          margin-top:12px;
+          padding:13px;
+          border:0;
+          border-radius:10px;
+          background:#16a34a;
+          color:#fff;
+          font-size:16px;
+          font-weight:600;
+          cursor:pointer;
+        "
       >
         Pay Now
       </button>
-
-      <button
         type="button"
         id="zerqilo-close-booking-details-bottom"
-        style="width:100%;margin-top:22px;padding:13px;border:0;border-radius:10px;background:#111827;color:#fff;font-size:16px;font-weight:600;cursor:pointer;"
+        style="
+          width:100%;
+          margin-top:22px;
+          padding:13px;
+          border:0;
+          border-radius:10px;
+          background:#111827;
+          color:#fff;
+          font-size:16px;
+          font-weight:600;
+          cursor:pointer;
+        "
       >
         Close
       </button>
+ 
 ```
 
     </div>
